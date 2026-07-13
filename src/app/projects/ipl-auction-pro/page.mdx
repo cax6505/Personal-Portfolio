@@ -1,0 +1,60 @@
+# Case Study: IPL Auction Pro
+
+## Real-time Multiplayer Bidding Platform
+
+**IPL Auction Pro** is a real-time, multiplayer Indian Premier League (IPL) auction simulator designed for up to 10 concurrent users. It synchronizes bidding states across users with sub-200ms latency and strictly enforces official IPL squad-building rules.
+
+---
+
+### Tech Stack
+*   **Frontend**: Next.js 15, TypeScript, Tailwind CSS, Framer Motion
+*   **Database & Realtime**: Supabase, PostgreSQL, Postgres Change Data Capture (CDC)
+*   **Protocol**: WebSockets (via Supabase Realtime Channels)
+
+---
+
+### The Problem
+During typical multiplayer bidding events, state conflicts occur when two users attempt to submit a bid on the same player at almost the same millisecond. If the system relies on traditional client-side validation or HTTP polling:
+1.  **Race Conditions**: Bids overwrite each other, causing double-deductions or invalid squad budgets.
+2.  **Latency Lag**: High delay (1s+) makes active auction environments feel unresponsive and frustrating.
+3.  **Complex Rules**: Ensuring every bid respects purse limits (e.g. max budget of ₹100 Cr), overseas player quotas (max 4 per squad), and incremental bidding steps.
+
+---
+
+### Engineering Solutions & Architecture
+
+```mermaid
+sequenceDiagram
+    participant User A as Bidder A
+    participant DB as Postgres Database
+    participant Channel as Supabase Realtime (WebSockets)
+    participant User B as Bidder B
+    
+    User A->>DB: Send Bid Transaction (RPC)
+    Note over DB: Check purse limit, quota,<br/>and lock player row
+    DB-->>User A: Transaction Success (New Highest Bidder)
+    DB->>Channel: CDC event (Row updated)
+    Channel-->>User B: Broadcast Update (WebSocket)
+    Note over User B: UI updates in <200ms
+```
+
+#### 1. Preventing Race Conditions with Database Transactions (RPC)
+Instead of validating and calculating purse limits in the client, I designed a PostgreSQL Database Function (RPC) called `place_bid()`. The function runs as a database transaction:
+*   It locks the current player row using `SELECT ... FOR UPDATE`.
+*   Verifies that the new bid satisfies the incremental bid logic (e.g., bid increments of ₹20L or ₹50L based on base price).
+*   Validates that the bidder has sufficient remaining purse.
+*   Enforces the overseas limit (maximum of 8 total squad players, 4 overseas players).
+*   Completes the update or rolls back with a clear error code if validation fails.
+
+#### 2. Sub-200ms Synchronization via Supabase Realtime
+To make the auction experience feel instant, we subscribed client components to Supabase Realtime Channels. When the database transaction completes, Postgres Change Data Capture (CDC) triggers a WebSocket broadcast to all connected clients in the lobby. The average round-trip synchronization latency is measured at **140ms**, well under the target threshold.
+
+#### 3. Role-Based Dashboards & Host Controls
+The platform implements a host control system that coordinates player card reveals, starts timers, pauses rounds, and handles unsold players. Standard users access a dashboard showing live squad composition, remaining purse, and active bidding actions.
+
+---
+
+### Outcomes and Performance
+*   **Concurrence**: Successfully tested with 10 concurrent active users bid-spamming on a single lobby.
+*   **Data Integrity**: Zero instances of budget overdrafts or over-quota squad selections.
+*   **RSC Optimization**: Using Next.js Server Components, static marketing content loads instantly, keeping the final bundle size small and responsive.
