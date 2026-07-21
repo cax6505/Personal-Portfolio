@@ -4,27 +4,27 @@ import React from "react";
 
 export function AuroraBackground() {
   return (
-    <div className="absolute inset-0 -z-30 overflow-hidden pointer-events-none bg-zinc-950 dark:bg-[#030303] transition-colors duration-300">
-      {/* 1. Subtle, high-contrast dot/grid grid overlay (fades out at edges) */}
+    <div className="absolute inset-0 -z-30 overflow-hidden pointer-events-none bg-zinc-50 dark:bg-[#030303] transition-colors duration-300">
+      {/* 1. Subtle dot grid overlay (fades out at edges) */}
       <div 
-        className="absolute inset-0 bg-[radial-gradient(#27272a_1px,transparent_1px)] dark:bg-[radial-gradient(#18181b_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)] opacity-[0.4] dark:opacity-[0.8]" 
+        className="absolute inset-0 bg-[radial-gradient(#d4d4d8_1px,transparent_1px)] dark:bg-[radial-gradient(#18181b_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)] opacity-[0.4] dark:opacity-[0.8]" 
       />
 
-      {/* 2. Rotating/Moving Fluid Aurora Blobs (Apple & Vercel design system) */}
-      <div className="absolute inset-0 filter blur-[100px] md:blur-[140px] opacity-[0.6] dark:opacity-[0.7] mix-blend-screen">
-        {/* Blob 1: Deep Violet - orbiting top-left */}
+      {/* 2. Rotating/Moving Fluid Aurora Blobs */}
+      <div className="absolute inset-0 filter blur-[100px] md:blur-[140px] opacity-[0.35] dark:opacity-[0.7] mix-blend-normal dark:mix-blend-screen">
+        {/* Blob 1: Soft Violet - orbiting top-left */}
         <div 
-          className="absolute top-[-10%] left-[-10%] w-[55vw] h-[55vh] rounded-full bg-violet-600/20 dark:bg-violet-700/15 animate-[orbit_20s_infinite_linear]" 
+          className="absolute top-[-10%] left-[-10%] w-[55vw] h-[55vh] rounded-full bg-violet-300/30 dark:bg-violet-700/15 animate-[orbit_20s_infinite_linear]" 
         />
         
-        {/* Blob 2: Indigo/Blue - orbiting top-right */}
+        {/* Blob 2: Soft Indigo/Blue - orbiting top-right */}
         <div 
-          className="absolute top-[10%] right-[-10%] w-[50vw] h-[50vh] rounded-full bg-indigo-600/20 dark:bg-indigo-700/15 animate-[orbit_25s_infinite_linear_reverse]" 
+          className="absolute top-[10%] right-[-10%] w-[50vw] h-[50vh] rounded-full bg-indigo-300/25 dark:bg-indigo-700/15 animate-[orbit_25s_infinite_linear_reverse]" 
         />
 
-        {/* Blob 3: Emerald/Teal - orbiting center-bottom */}
+        {/* Blob 3: Soft Emerald/Teal - orbiting center-bottom */}
         <div 
-          className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vh] rounded-full bg-teal-500/15 dark:bg-teal-600/10 animate-[orbit_30s_infinite_linear]" 
+          className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vh] rounded-full bg-emerald-200/25 dark:bg-teal-600/10 animate-[orbit_30s_infinite_linear]" 
         />
       </div>
 
