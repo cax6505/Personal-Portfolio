@@ -2,10 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CommandPalette } from "@/components/command-palette";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { NavigationHeader } from "@/components/navigation-header";
 import { Github, Linkedin, Mail } from "lucide-react";
 import "./globals.css";
-import Link from "next/link";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 
 const sansFont = Inter({
@@ -81,33 +80,7 @@ export default function RootLayout({
           <CommandPalette />
 
           {/* Navigation Header */}
-          <header className="fixed top-4 left-1/2 -translate-x-1/2 z-30 w-fit rounded-full border border-zinc-200/10 dark:border-white/15 bg-zinc-100/70 dark:bg-white/[0.08] backdrop-blur-2xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.15)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.2)] transition-all duration-300">
-            <div className="px-6 h-14 flex items-center gap-6">
-              <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                <Link href="/#about" className="hover:text-zinc-900 dark:hover:text-zinc-100 hover-trigger transition-colors">
-                  About
-                </Link>
-                <Link href="/#experience" className="hover:text-zinc-900 dark:hover:text-zinc-100 hover-trigger transition-colors">
-                  Experience
-                </Link>
-                <Link href="/#projects" className="hover:text-zinc-900 dark:hover:text-zinc-100 hover-trigger transition-colors">
-                  Projects
-                </Link>
-                <Link href="/#skills" className="hover:text-zinc-900 dark:hover:text-zinc-100 hover-trigger transition-colors">
-                  Skills
-                </Link>
-                <Link href="/#contact" className="hover:text-zinc-900 dark:hover:text-zinc-100 hover-trigger transition-colors">
-                  Contact
-                </Link>
-              </nav>
-
-              <div className="hidden md:block h-5 w-px bg-zinc-200 dark:bg-zinc-800" />
-
-              <div className="flex items-center">
-                <ThemeToggle />
-              </div>
-            </div>
-          </header>
+          <NavigationHeader />
 
           {/* Main page space */}
           <main className="relative flex-1 w-full bg-background overflow-hidden transition-colors duration-300">
@@ -124,11 +97,11 @@ export default function RootLayout({
           </main>
 
           {/* Footer */}
-          <footer className="w-full border-t border-zinc-200 dark:border-zinc-800 py-8 bg-zinc-50 dark:bg-zinc-950/60 transition-colors">
+          <footer className="w-full border-t border-zinc-200 dark:border-zinc-800 py-8 bg-zinc-50/80 dark:bg-zinc-950/60 transition-colors">
             <div className="container mx-auto max-w-6xl px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500 dark:text-zinc-400">
-              <div>
+              <div className="text-center md:text-left">
                 <p>© {new Date().getFullYear()} Kolli Charan Adithya. All rights reserved.</p>
-                <p className="text-xs text-zinc-400 mt-1">Designed & engineered with Next.js 15 + Tailwind CSS v4</p>
+                <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">Designed & engineered with Next.js 15 + Tailwind CSS v4</p>
               </div>
               <div className="flex items-center gap-6">
                 <a
