@@ -2,12 +2,18 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { Github, BookOpen, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import type { RepoStats } from "@/lib/github";
 import { PROJECTS_DATA } from "@/lib/portfolio-data";
+
+const SPOTLIGHT_COLORS: Record<string, string> = {
+  "ipl-auction-pro": "rgba(99, 102, 241, 0.15)", // indigo
+  "predictive-sales-analytics": "rgba(16, 185, 129, 0.15)", // emerald
+};
 
 interface ProjectsClientProps {
   initialStats: Record<string, RepoStats>;
@@ -32,7 +38,7 @@ export function ProjectsClient({ initialStats }: ProjectsClientProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="font-display text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-b from-white via-zinc-200 to-zinc-500 dark:bg-gradient-to-b dark:from-white dark:via-zinc-100 dark:to-zinc-600 bg-clip-text text-transparent"
+            className="font-display text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-b from-zinc-950 via-zinc-800 to-zinc-500 dark:from-white dark:via-zinc-100 dark:to-zinc-600 bg-clip-text text-transparent"
           >
             Featured Projects
           </motion.h2>
@@ -63,15 +69,16 @@ export function ProjectsClient({ initialStats }: ProjectsClientProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className="relative overflow-hidden group h-full rounded-2xl border border-zinc-200/10 dark:border-white/5 bg-zinc-100/50 dark:bg-[#121214]/40 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] hover:bg-zinc-200/50 hover:dark:bg-[#161619]/60 hover:border-zinc-300 dark:hover:border-white/10 transition-all duration-300">
-                  {/* Subtle Glowing Highlight Accent Line */}
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-violet-500/0 via-violet-500/30 to-indigo-500/0 group-hover:via-violet-500/60 transition-all duration-500" />
+              <SpotlightCard
+                spotlightColor={SPOTLIGHT_COLORS[project.slug]}
+                className="group h-full"
+              >
 
                   <CardContent className="p-8 flex flex-col justify-between h-full space-y-6">
                     <div className="space-y-4">
                       {/* Top Header with language tag */}
                       <div className="flex items-center">
-                        <span className="text-[10px] font-mono tracking-wider uppercase font-semibold px-2.5 py-1 rounded-full bg-zinc-200/60 dark:bg-white/[0.04] text-zinc-500 dark:text-zinc-400 border border-zinc-300/30 dark:border-white/5">
+                        <span className="text-[10px] font-mono tracking-wider uppercase font-semibold px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-white/[0.04] text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/5">
                           {stats.language}
                         </span>
                       </div>
@@ -82,7 +89,7 @@ export function ProjectsClient({ initialStats }: ProjectsClientProps) {
                       </h3>
 
                       {/* Description */}
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-normal">
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
                         {project.description}
                       </p>
                     </div>
@@ -104,7 +111,7 @@ export function ProjectsClient({ initialStats }: ProjectsClientProps) {
                         asChild
                         variant="outline"
                         size="sm"
-                        className="rounded-xl text-xs border border-zinc-200/20 dark:border-white/5 hover:bg-zinc-100/50 dark:hover:bg-white/[0.04] text-zinc-600 dark:text-zinc-300 font-medium px-4 py-2.5 transition-all duration-300"
+                        className="rounded-xl text-xs border border-zinc-200 dark:border-white/5 hover:bg-zinc-100 dark:hover:bg-white/[0.04] text-zinc-600 dark:text-zinc-300 font-medium px-4 py-2.5 transition-all duration-300"
                       >
                         <a
                           href={stats.url}
@@ -119,7 +126,7 @@ export function ProjectsClient({ initialStats }: ProjectsClientProps) {
                       </Button>
                     </div>
                   </CardContent>
-                </Card>
+              </SpotlightCard>
               </motion.div>
             );
           })}
