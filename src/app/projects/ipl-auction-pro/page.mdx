@@ -1,3 +1,5 @@
+import { RealtimeBidSequence } from "@/components/ui/realtime-bid-sequence";
+
 # Case Study: IPL Auction Pro
 
 ## Real-time Multiplayer Bidding Platform
@@ -23,20 +25,7 @@ During typical multiplayer bidding events, state conflicts occur when two users 
 
 ### Engineering Solutions & Architecture
 
-```mermaid
-sequenceDiagram
-    participant User A as Bidder A
-    participant DB as Postgres Database
-    participant Channel as Supabase Realtime (WebSockets)
-    participant User B as Bidder B
-    
-    User A->>DB: Send Bid Transaction (RPC)
-    Note over DB: Check purse limit, quota,<br/>and lock player row
-    DB-->>User A: Transaction Success (New Highest Bidder)
-    DB->>Channel: CDC event (Row updated)
-    Channel-->>User B: Broadcast Update (WebSocket)
-    Note over User B: UI updates in <200ms
-```
+<RealtimeBidSequence />
 
 #### 1. Preventing Race Conditions with Database Transactions (RPC)
 Instead of validating and calculating purse limits in the client, I designed a PostgreSQL Database Function (RPC) called `place_bid()`. The function runs as a database transaction:

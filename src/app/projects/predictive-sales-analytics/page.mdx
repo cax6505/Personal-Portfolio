@@ -1,3 +1,5 @@
+import { SalesPipelineFlow } from "@/components/ui/sales-pipeline-flow";
+
 # Case Study: Predictive Sales Analytics Engine
 
 ## Leakage-Safe Customer Repeat Purchase Forecasting
@@ -23,19 +25,7 @@ E-commerce predictive modeling suffers from two frequent issues that inflate tra
 
 ### Engineering Solutions & Architecture
 
-```mermaid
-graph TD
-    A[Raw Sales Data] --> B[Strict Temporal Split]
-    B -->|Pre-2024| C[Train Set]
-    B -->|Post-2024| D[Test Set]
-    C --> E[Feature Engineering]
-    C --> F[TF-IDF on Customer Reviews]
-    E --> G[Custom Scikit-Learn Pipeline]
-    F --> G
-    G -->|Weighted Loss / RF| H[Model Training]
-    H --> I[PR-AUC & F1 Threshold Tuning]
-    I --> J[1.57x Lift Evaluation]
-```
+<SalesPipelineFlow />
 
 #### 1. Temporal Splits for Zero Leakage
 To ensure realistic evaluation, I implemented a strict temporal split instead of standard random splits.
