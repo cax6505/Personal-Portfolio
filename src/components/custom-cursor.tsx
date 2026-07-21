@@ -2,14 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
+import { useTheme } from "next-themes";
 
 export function CustomCursor() {
   const [hovered, setHovered] = useState(false);
   const [visible, setVisible] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     // Only activate cursor if pointer is fine (mouse/desktop)
@@ -49,7 +56,9 @@ export function CustomCursor() {
         target.closest(".hover-trigger") ||
         target.tagName === "INPUT" ||
         target.tagName === "TEXTAREA" ||
-        target.getAttribute("role") === "button";
+        target.getAttribute("role") === "button" ||
+        target.closest("[role='option']") ||
+        target.closest("[data-slot='command-item']");
 
       if (isInteractive) {
         setHovered(true);
@@ -78,22 +87,52 @@ export function CustomCursor() {
 
   if (!visible) return null;
 
+  // Theme-aware cursor colors
+  const isDark = mounted ? resolvedTheme === "dark" : true;
+  const ringBorderColor = isDark ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.6)";
+  const ringHoverBg = isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.04)";
+  const dotColor = isDark ? "rgba(255, 255, 255, 0.9)" : "rgba(0, 0, 0, 0.7)";
+
   return (
-    <motion.div
-      className="fixed top-0 left-0 rounded-full pointer-events-none z-50 mix-blend-difference bg-white"
-      style={{
-        x: cursorX,
-        y: cursorY,
-        translateX: "-50%",
-        translateY: "-50%",
-        width: hovered ? 28 : 8,
-        height: hovered ? 28 : 8,
-      }}
-      animate={{
-        scale: clicked ? 0.95 : 1,
-      }}
-      transition={{ type: "tween", ease: "backOut", duration: 0.15 }}
-    />
+    <>
+      {/* Outer Ring */}
+      <motion.div
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999]"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: hovered ? 44 : 20,
+          height: hovered ? 44 : 20,
+          backgroundColor: hovered ? ringHoverBg : "transparent",
+          border: `1px solid ${ringBorderColor}`,
+          mixBlendMode: isDark ? "difference" : "normal",
+        }}
+        animate={{
+          scale: clicked ? 0.85 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+      />
+      {/* Inner Precision Dot */}
+      <motion.div
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999]"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: 5,
+          height: 5,
+          backgroundColor: dotColor,
+          mixBlendMode: isDark ? "difference" : "normal",
+        }}
+        animate={{
+          scale: hovered ? 0 : clicked ? 0.5 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+      />
+    </>
   );
 }
 export default CustomCursor;
