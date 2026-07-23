@@ -13,6 +13,7 @@ import { PROJECTS_DATA } from "@/lib/portfolio-data";
 const SPOTLIGHT_COLORS: Record<string, string> = {
   "ipl-auction-pro": "rgba(99, 102, 241, 0.15)", // indigo
   "predictive-sales-analytics": "rgba(16, 185, 129, 0.15)", // emerald
+  "tricore-fs": "rgba(245, 158, 11, 0.15)", // amber
 };
 
 interface ProjectsClientProps {

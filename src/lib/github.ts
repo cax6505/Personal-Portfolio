@@ -18,6 +18,12 @@ const FALLBACK_STATS: Record<string, RepoStats> = {
     language: "Python",
     url: "https://github.com/cax6505", // default fallback URL
   },
+  "tricore-fs": {
+    stars: 0,
+    forks: 0,
+    language: "TypeScript",
+    url: "https://github.com/cax6505/TriCore-FS",
+  },
 };
 
 export async function getRepoStats(repoName: string): Promise<RepoStats> {
@@ -28,7 +34,9 @@ export async function getRepoStats(repoName: string): Promise<RepoStats> {
   if (repoSlug.includes("ipl")) {
     actualRepoName = "IPL-Auction-simulator"; // Make sure we query the exact repo name
   } else if (repoSlug.includes("sales") || repoSlug.includes("predictive")) {
-    actualRepoName = "Predictive-Sales-Analytics-Engine"; // Example repo name
+    actualRepoName = "Predictive-Sales-Analytics-Engine";
+  } else if (repoSlug.includes("tricore")) {
+    actualRepoName = "TriCore-FS";
   }
 
   try {
@@ -42,7 +50,12 @@ export async function getRepoStats(repoName: string): Promise<RepoStats> {
 
     if (!res.ok) {
       console.warn(`GitHub API failed for repo ${actualRepoName}. Using fallback stats.`);
-      return FALLBACK_STATS[repoSlug.includes("ipl") ? "ipl-auction-pro" : "sales-analytics"];
+      const fallbackKey = repoSlug.includes("ipl")
+        ? "ipl-auction-pro"
+        : repoSlug.includes("tricore")
+          ? "tricore-fs"
+          : "sales-analytics";
+      return FALLBACK_STATS[fallbackKey];
     }
 
     const data = await res.json();
@@ -54,6 +67,11 @@ export async function getRepoStats(repoName: string): Promise<RepoStats> {
     };
   } catch (error) {
     console.error(`Error fetching stats for ${repoName}:`, error);
-    return FALLBACK_STATS[repoSlug.includes("ipl") ? "ipl-auction-pro" : "sales-analytics"];
+    const fallbackKey = repoSlug.includes("ipl")
+      ? "ipl-auction-pro"
+      : repoSlug.includes("tricore")
+        ? "tricore-fs"
+        : "sales-analytics";
+    return FALLBACK_STATS[fallbackKey];
   }
 }

@@ -167,6 +167,27 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/10 border-emerald-500/20",
     glowClass: "from-emerald-500/10",
   },
+  {
+    title: "SaveSpace — File System Simulator",
+    slug: "tricore-fs",
+    repoKey: "tricore",
+    description:
+      "Interactive educational web app for understanding file systems through visual disk block mapping, allocation strategy comparison, and a smart file organizer — all built to teach core OS concepts hands-on.",
+    longDescription:
+      "Built using Next.js, TypeScript, Tailwind CSS, and deployed on Vercel. Features a visual file system simulator with Contiguous, Linked, Indexed, FAT, and Unix-style allocation strategies, fragmentation visualization, inode metadata inspection, a Finder-style smart file organizer, and a standalone npm CLI package.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "CSS",
+      "Vercel",
+    ],
+    githubUrl: "https://github.com/cax6505/TriCore-FS",
+    languageColor:
+      "text-amber-500 dark:text-amber-400 bg-amber-500/10 dark:bg-amber-500/10 border-amber-500/20",
+    glowClass: "from-amber-500/10",
+  },
 ];
 
 // ---------------------------------------------------------------------------

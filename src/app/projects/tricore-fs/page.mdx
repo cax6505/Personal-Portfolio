@@ -1,0 +1,67 @@
+# Case Study: SaveSpace — File System Simulator
+
+## Interactive OS Education Platform
+
+**SaveSpace** (TriCore-FS) is an educational web application that teaches file system concepts through interactive simulation and smart file management. It combines a modern landing experience with a full visualization workspace, Finder-style interface, and an intelligent file organizer — all designed to make core Operating System concepts tangible and hands-on.
+
+**[Live Demo →](https://tricore-fs.vercel.app/)**
+
+---
+
+### Tech Stack
+*   **Frontend**: Next.js, TypeScript, Tailwind CSS
+*   **Deployment**: Vercel
+*   **Package**: Standalone `smart-folder-organiser` npm CLI package
+
+---
+
+### The Problem
+Understanding file system internals — allocation strategies, fragmentation, inode metadata, and disk block mapping — is one of the most abstract topics in Operating Systems coursework. Traditional textbook diagrams are static and fail to convey:
+1.  **Allocation Trade-offs**: How Contiguous, Linked, Indexed, FAT, and Unix-style allocation strategies behave differently under real workloads.
+2.  **Fragmentation Dynamics**: Why and how fragmentation occurs, and what it looks like in practice on a disk.
+3.  **Practical File Organization**: Bridging the gap between theoretical OS concepts and real-world file management skills.
+
+---
+
+### Engineering Solutions & Architecture
+
+#### 1. Visual Disk Block Mapping & Allocation Strategies
+The simulator models core file system primitives — `Inode` (file metadata + block pointers), `Directory` (name → inode mapping), and `Disk` (block array + free bitmap). Users can create, delete, and inspect files while watching disk blocks get allocated in real time across five different strategies:
+
+| Strategy | Block Storage | Access Pattern | Fragmentation Profile |
+|---|---|---|---|
+| Contiguous | Adjacent blocks | Fast sequential/random | External fragmentation risk |
+| Linked | Chained scattered blocks | Sequential-friendly | No external fragmentation |
+| Indexed | Index block + data blocks | Fast random access | Index overhead |
+| FAT | File Allocation Table | Table-driven lookup | Central table bottleneck |
+| Unix-style | Direct + indirect pointers | Balanced performance | Multi-level indirection |
+
+#### 2. Fragmentation Visualization & Inode Inspection
+The disk visualization module renders the entire block array as a grid, color-coded by file ownership. Users can visually identify external fragmentation patterns, inspect inode metadata (size, block pointers, timestamps), and understand disk usage at a glance.
+
+#### 3. Smart File Organizer with npm Package
+Beyond the simulator, SaveSpace includes a Finder-style smart file organizer that automatically classifies files by type and organizes them into logical folders. This component was extracted into a standalone **`smart-folder-organiser`** npm package for CLI-based file organization.
+
+#### 4. Interactive Learning Guides
+Each major feature has a dedicated guide page (`/guide` for the simulator, `/organiser-guide` for the organizer) that explains concepts step-by-step with interactive examples, bridging theory and practice.
+
+---
+
+### Route Architecture
+
+| Route | Purpose |
+|---|---|
+| `/` | Product landing page |
+| `/visualization` | Main file system simulator workspace |
+| `/organiser` | Smart file organizer interface |
+| `/guide` | Visualization learning guide |
+| `/organiser-guide` | Organizer concepts & OS guide |
+| `/npm-package` | Smart Folder Organiser npm package docs |
+
+---
+
+### Outcomes
+*   **Educational Impact**: Turns abstract OS concepts into interactive, visual experiences that students can explore at their own pace.
+*   **Full-Stack TypeScript**: 512K+ lines of TypeScript powering both the simulator logic and the UI.
+*   **Reusable Package**: The `smart-folder-organiser` npm package works independently as a CLI tool, demonstrating modular architecture.
+*   **Production Deployed**: Live on Vercel with fast global edge delivery.
