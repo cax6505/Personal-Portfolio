@@ -6,6 +6,12 @@ export interface RepoStats {
 }
 
 const FALLBACK_STATS: Record<string, RepoStats> = {
+  "modelroute": {
+    stars: 1,
+    forks: 0,
+    language: "TypeScript",
+    url: "https://github.com/cax6505/ModelRoute",
+  },
   "ipl-auction-pro": {
     stars: 8,
     forks: 3,
@@ -31,7 +37,9 @@ export async function getRepoStats(repoName: string): Promise<RepoStats> {
   
   // Resolve actual repo identifier names
   let actualRepoName = repoName;
-  if (repoSlug.includes("ipl")) {
+  if (repoSlug.includes("modelroute")) {
+    actualRepoName = "ModelRoute";
+  } else if (repoSlug.includes("ipl")) {
     actualRepoName = "IPL-Auction-simulator"; // Make sure we query the exact repo name
   } else if (repoSlug.includes("sales") || repoSlug.includes("predictive")) {
     actualRepoName = "Predictive-Sales-Analytics-Engine";
@@ -50,11 +58,13 @@ export async function getRepoStats(repoName: string): Promise<RepoStats> {
 
     if (!res.ok) {
       console.warn(`GitHub API failed for repo ${actualRepoName}. Using fallback stats.`);
-      const fallbackKey = repoSlug.includes("ipl")
-        ? "ipl-auction-pro"
-        : repoSlug.includes("tricore")
-          ? "tricore-fs"
-          : "sales-analytics";
+      const fallbackKey = repoSlug.includes("modelroute")
+        ? "modelroute"
+        : repoSlug.includes("ipl")
+          ? "ipl-auction-pro"
+          : repoSlug.includes("tricore")
+            ? "tricore-fs"
+            : "sales-analytics";
       return FALLBACK_STATS[fallbackKey];
     }
 
@@ -67,11 +77,13 @@ export async function getRepoStats(repoName: string): Promise<RepoStats> {
     };
   } catch (error) {
     console.error(`Error fetching stats for ${repoName}:`, error);
-    const fallbackKey = repoSlug.includes("ipl")
-      ? "ipl-auction-pro"
-      : repoSlug.includes("tricore")
-        ? "tricore-fs"
-        : "sales-analytics";
+    const fallbackKey = repoSlug.includes("modelroute")
+      ? "modelroute"
+      : repoSlug.includes("ipl")
+        ? "ipl-auction-pro"
+        : repoSlug.includes("tricore")
+          ? "tricore-fs"
+          : "sales-analytics";
     return FALLBACK_STATS[fallbackKey];
   }
 }
