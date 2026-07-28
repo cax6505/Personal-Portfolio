@@ -239,11 +239,12 @@ export const SKILLS_DATA: SkillGroup[] = [
     items: [
       "React",
       "React Native",
-      "Next.js",
+      "Next.js 15",
       "Node.js",
       "Express.js",
       "Tailwind CSS",
       "Framer Motion",
+      "Zod",
     ],
     colorClass:
       "text-sky-500 dark:text-sky-400 bg-sky-500/10 dark:bg-sky-500/10 border-sky-500/20",
@@ -253,6 +254,8 @@ export const SKILLS_DATA: SkillGroup[] = [
     category: "ML & Deep Learning",
     iconName: "BrainCircuit",
     items: [
+      "LLMs & Prompt Engineering",
+      "Groq & Gemini APIs",
       "scikit-learn",
       "TensorFlow",
       "Keras",
@@ -267,7 +270,15 @@ export const SKILLS_DATA: SkillGroup[] = [
   {
     category: "ML Engineering",
     iconName: "Cpu",
-    items: ["Feature Engineering", "Class Imbalance Handling", "TF-IDF"],
+    items: [
+      "LLM Routing & Orchestration",
+      "Circuit Breaker Resilience",
+      "Sliding-Window Rate Limiting",
+      "SSE Streaming APIs",
+      "Feature Engineering",
+      "Class Imbalance Handling",
+      "TF-IDF",
+    ],
     colorClass:
       "text-amber-500 dark:text-amber-400 bg-amber-500/10 dark:bg-amber-500/10 border-amber-500/20",
     glowClass: "from-amber-500/5",
@@ -275,7 +286,7 @@ export const SKILLS_DATA: SkillGroup[] = [
   {
     category: "Databases & ORMs",
     iconName: "Database",
-    items: ["MySQL", "PostgreSQL", "Prisma", "Supabase"],
+    items: ["MySQL", "PostgreSQL", "Upstash Redis", "Supabase", "Prisma"],
     colorClass:
       "text-indigo-500 dark:text-indigo-400 bg-indigo-500/10 dark:bg-indigo-500/10 border-indigo-500/20",
     glowClass: "from-indigo-500/5",
@@ -286,11 +297,12 @@ export const SKILLS_DATA: SkillGroup[] = [
     items: [
       "Git",
       "GitHub",
-      "Figma",
+      "Vitest",
       "Cypress",
       "WebSockets",
       "REST APIs",
       "Vercel",
+      "Figma",
     ],
     colorClass:
       "text-rose-500 dark:text-rose-400 bg-rose-500/10 dark:bg-rose-500/10 border-rose-500/20",
