@@ -39,7 +39,7 @@ export function Experience() {
         </div>
 
         {/* Timeline Visual Container */}
-        <div className="relative border-l border-zinc-300 dark:border-white/10 ml-4 md:ml-32 pl-8 md:pl-10 space-y-12 py-4">
+        <div className="relative border-l border-zinc-300 dark:border-white/10 ml-4 md:ml-44 pl-6 md:pl-8 space-y-12 py-4">
           {/* Subtle Vertical Glow Indicator Line */}
           <div className="absolute top-0 bottom-0 left-0 w-px bg-gradient-to-b from-violet-500 via-indigo-500 to-transparent -ml-[1px]" />
 
@@ -53,13 +53,13 @@ export function Experience() {
               className="relative"
             >
               {/* Timeline Bead Circle Node with Glow */}
-              <div className="absolute -left-[45px] md:-left-[53px] top-1.5 flex items-center justify-center size-8 rounded-full border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#121214] shadow-[0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_10px_rgba(0,0,0,0.8)] z-10">
+              <div className="absolute -left-[41px] md:-left-[49px] top-1.5 flex items-center justify-center size-8 rounded-full border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#121214] shadow-[0_2px_8px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_10px_rgba(0,0,0,0.8)] z-10">
                 <div className="size-2.5 rounded-full bg-violet-500 dark:bg-violet-400 group-hover:scale-125 transition-transform" />
               </div>
 
               {/* Company / Date floating label in timeline left-gutter on desktop */}
-              <div className="hidden md:block absolute -left-44 top-2 text-right w-32">
-                <span className="text-[10px] font-mono tracking-wider uppercase font-bold text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-white/[0.03] px-2.5 py-1 rounded-full border border-zinc-200 dark:border-white/5">
+              <div className="hidden md:flex absolute right-full top-2 mr-14 items-center justify-end pointer-events-none">
+                <span className="text-[10px] font-mono tracking-wider uppercase font-bold text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-white/[0.04] px-3 py-1 rounded-full border border-zinc-200 dark:border-white/5 whitespace-nowrap shadow-sm">
                   {exp.period}
                 </span>
               </div>
@@ -83,8 +83,8 @@ export function Experience() {
                   </div>
 
                   {/* Mobile Period badge (only on small viewports) */}
-                  <div className="md:hidden">
-                    <span className="text-[10px] font-mono tracking-wider uppercase font-bold text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-white/[0.03] px-2.5 py-1 rounded-full border border-zinc-200 dark:border-white/5">
+                  <div className="md:hidden mt-1">
+                    <span className="inline-block text-[10px] font-mono tracking-wider uppercase font-bold text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-white/[0.04] px-3 py-1 rounded-full border border-zinc-200 dark:border-white/5 whitespace-nowrap">
                       {exp.period}
                     </span>
                   </div>
