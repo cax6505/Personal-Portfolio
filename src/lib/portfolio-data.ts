@@ -124,20 +124,43 @@ export interface ProjectItem {
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
-    title: "IPL Auction Pro (Multiplayer Demo)",
+    title: "ModelRoute — Enterprise LLM Routing Engine",
+    slug: "modelroute",
+    repoKey: "modelroute",
+    description:
+      "Enterprise-grade LLM routing system dynamically classifying user prompts and dispatching requests across Groq, Gemini, and local models based on intent, cost, latency, and capability constraints.",
+    longDescription:
+      "Built with Next.js 15, TypeScript, Tailwind CSS, Upstash Redis, Supabase (PostgreSQL), and Vitest. Features a hybrid classification engine across 8 task categories, stateful Circuit Breaker resilience (CLOSED/OPEN/HALF_OPEN), SHA-256 API key authentication, sliding-window rate limiting, and real-time SSE streaming metrics.",
+    tech: [
+      "Next.js 15",
+      "TypeScript",
+      "Tailwind CSS",
+      "Upstash Redis",
+      "Supabase",
+      "Vitest",
+      "Groq API",
+      "Gemini API",
+    ],
+    githubUrl: "https://github.com/cax6505/ModelRoute",
+    languageColor:
+      "text-sky-500 dark:text-sky-400 bg-sky-500/10 dark:bg-sky-500/10 border-sky-500/20",
+    glowClass: "from-sky-500/10",
+  },
+  {
+    title: "DraftForge — IPL Mega Auction Simulator",
     slug: "ipl-auction-pro",
     repoKey: "ipl",
     description:
-      "Real-time multiplayer IPL auction platform supporting up to 10 concurrent users, sub-200ms bid sync, and rule-based bidding engines.",
+      "Real-time multiplayer cricket manager IPL Mega Auction simulator with sub-second bidding sync, atomic postgres concurrency, and rule-based squad engines.",
     longDescription:
-      "Built using Next.js 15, TypeScript, Tailwind CSS, Supabase, WebSockets, and Postgres CDC. Features host controls, real-time lobby discovery, purse limit calculations, overseas quota checking, and role-based squad dashboards.",
+      "Built using Next.js, TypeScript, Tailwind CSS, Supabase Realtime, and PostgreSQL. Features real-time multi-client war rooms, atomic PostgreSQL concurrency via database RPC transactions (execute_bid), official IPL bidding ladder increments, ₹120 Cr purse & squad limits, public/private 6-digit room discovery, and live chat feed.",
     tech: [
       "Next.js",
       "TypeScript",
       "Tailwind CSS",
       "Supabase",
       "WebSockets",
-      "Postgres CDC",
+      "PostgreSQL",
     ],
     githubUrl: "https://github.com/cax6505/IPL-Auction-simulator",
     languageColor:
@@ -356,8 +379,14 @@ export const ZONE_POSITIONS: ZonePosition[] = [
   },
   { id: "skills", label: "Skills", position: [0, 0, -42], triggerRadius: 12 },
   {
+    id: "project-modelroute",
+    label: "ModelRoute Engine",
+    position: [24, 0, 8],
+    triggerRadius: 9,
+  },
+  {
     id: "project-ipl",
-    label: "IPL Auction Pro",
+    label: "DraftForge Simulator",
     position: [32, 0, 15],
     triggerRadius: 9,
   },

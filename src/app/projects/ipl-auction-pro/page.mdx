@@ -1,49 +1,90 @@
 import { RealtimeBidSequence } from "@/components/ui/realtime-bid-sequence";
 
-# Case Study: IPL Auction Pro
+# Case Study: DraftForge — IPL Mega Auction Simulator
 
-## Real-time Multiplayer Bidding Platform
+## Real-Time Multiplayer Cricket Manager Draft Room
 
-**IPL Auction Pro** is a real-time, multiplayer Indian Premier League (IPL) auction simulator designed for up to 10 concurrent users. It synchronizes bidding states across users with sub-200ms latency and strictly enforces official IPL squad-building rules.
+**DraftForge** is a real-time, multi-client cricket manager draft room simulator built for IPL strategy gaming. It mirrors the exact mechanics, financial constraints, and fast-paced excitement of the official **IPL Mega Auction**.
+
+**[GitHub Repository →](https://github.com/cax6505/IPL-Auction-simulator)**
 
 ---
 
 ### Tech Stack
-*   **Frontend**: Next.js 15, TypeScript, Tailwind CSS, Framer Motion
-*   **Database & Realtime**: Supabase, PostgreSQL, Postgres Change Data Capture (CDC)
-*   **Protocol**: WebSockets (via Supabase Realtime Channels)
+*   **Frontend**: Next.js, TypeScript, Tailwind CSS, Framer Motion, Lucide Icons
+*   **Database & Realtime**: Supabase, PostgreSQL, Supabase Realtime Channels (WebSockets)
+*   **Concurrency & Auth**: PostgreSQL RPC Database Functions (`execute_bid`), Row-Level Security (RLS)
 
 ---
 
 ### The Problem
-During typical multiplayer bidding events, state conflicts occur when two users attempt to submit a bid on the same player at almost the same millisecond. If the system relies on traditional client-side validation or HTTP polling:
-1.  **Race Conditions**: Bids overwrite each other, causing double-deductions or invalid squad budgets.
-2.  **Latency Lag**: High delay (1s+) makes active auction environments feel unresponsive and frustrating.
-3.  **Complex Rules**: Ensuring every bid respects purse limits (e.g. max budget of ₹100 Cr), overseas player quotas (max 4 per squad), and incremental bidding steps.
+During high-frequency multiplayer bidding wars, state synchronization conflicts frequently occur when multiple users attempt to bid on the same player in the exact same millisecond:
+1.  **Race Conditions**: Simultaneous client-side requests cause double-deductions, out-of-order bid logs, or budget overdrafts.
+2.  **Latency Delays**: Traditional HTTP polling or un-optimized socket loops create sluggish 1s+ delays that ruin live auction intensity.
+3.  **Complex Multi-Rule Enforcement**: Real-time validation of dynamic bidding ladders (e.g. ₹5L to ₹50L step increments), total purse ceilings (₹120 Cr), overseas player quotas (max 8), and minimum squad counts (18–25 players).
 
 ---
 
-### Engineering Solutions & Architecture
+### Key Engineering Solutions & Architecture
 
 <RealtimeBidSequence />
 
-#### 1. Preventing Race Conditions with Database Transactions (RPC)
-Instead of validating and calculating purse limits in the client, I designed a PostgreSQL Database Function (RPC) called `place_bid()`. The function runs as a database transaction:
-*   It locks the current player row using `SELECT ... FOR UPDATE`.
-*   Verifies that the new bid satisfies the incremental bid logic (e.g., bid increments of ₹20L or ₹50L based on base price).
-*   Validates that the bidder has sufficient remaining purse.
-*   Enforces the overseas limit (maximum of 8 total squad players, 4 overseas players).
-*   Completes the update or rolls back with a clear error code if validation fails.
+#### 1. Atomic Concurrency Protection via PostgreSQL RPC (`execute_bid`)
+To eliminate race conditions, bid validation and state execution are handled inside a PostgreSQL Database Function (RPC).
+*   Locks the active player row instantly using `SELECT ... FOR UPDATE`.
+*   Verifies bid increment validity against official IPL ladder thresholds.
+*   Validates purse capacity and enforces overseas quota limits before updating database state.
+*   Commits atomically or rolls back with precise error diagnostics if rule checks fail.
 
-#### 2. Sub-200ms Synchronization via Supabase Realtime
-To make the auction experience feel instant, we subscribed client components to Supabase Realtime Channels. When the database transaction completes, Postgres Change Data Capture (CDC) triggers a WebSocket broadcast to all connected clients in the lobby. The average round-trip synchronization latency is measured at **140ms**, well under the target threshold.
+#### 2. Sub-200ms State Sync via Supabase Realtime
+Connected client war rooms subscribe to Supabase Realtime WebSocket broadcast channels. As soon as a transaction commits in PostgreSQL, change events trigger instant WebSocket broadcasts to all connected clients in the lobby. Synchronized state updates achieve sub-200ms latency across multi-user sessions.
 
-#### 3. Role-Based Dashboards & Host Controls
-The platform implements a host control system that coordinates player card reveals, starts timers, pauses rounds, and handles unsold players. Standard users access a dashboard showing live squad composition, remaining purse, and active bidding actions.
+#### 3. Official IPL Mechanics & Draft Modes
+*   **Official Bidding Ladder**: Automatically scales bid increments dynamically (₹5L/₹10L under ₹2 Cr, ₹25L up to ₹5 Cr, and ₹50L above ₹5 Cr).
+*   **Franchise Management**: Allows users to host public rooms or create 6-digit private code war rooms to claim any of the 10 official IPL franchises.
+*   **Multiple Game Modes**: Full Mega Auction, Mock 2026 Draft, and Retired Legends Draft pools.
+
+---
+
+### System Architecture Summary
+
+<div className="my-6 overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+  <table className="w-full text-left text-sm border-collapse">
+    <thead className="bg-zinc-100/80 dark:bg-zinc-900/80 text-xs font-semibold text-zinc-900 dark:text-zinc-200 uppercase tracking-wider border-b border-zinc-200 dark:border-zinc-800">
+      <tr>
+        <th className="px-4 py-3 font-semibold">Component</th>
+        <th className="px-4 py-3 font-semibold">Technology</th>
+        <th className="px-4 py-3 font-semibold">Function</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 bg-white/50 dark:bg-zinc-950/40 text-zinc-600 dark:text-zinc-400">
+      <tr className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 transition-colors">
+        <td className="px-4 py-3 font-semibold text-zinc-900 dark:text-zinc-200">War Room UI</td>
+        <td className="px-4 py-3 font-mono text-xs text-sky-600 dark:text-sky-400">Next.js + Tailwind CSS</td>
+        <td className="px-4 py-3">Real-time squad scoreboard, timer, & bid controls</td>
+      </tr>
+      <tr className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 transition-colors">
+        <td className="px-4 py-3 font-semibold text-zinc-900 dark:text-zinc-200">Realtime Engine</td>
+        <td className="px-4 py-3 font-mono text-xs text-sky-600 dark:text-sky-400">Supabase Realtime (WebSockets)</td>
+        <td className="px-4 py-3">Sub-second broadcast of bids, timer events, & chat feed</td>
+      </tr>
+      <tr className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 transition-colors">
+        <td className="px-4 py-3 font-semibold text-zinc-900 dark:text-zinc-200">Concurrency Layer</td>
+        <td className="px-4 py-3 font-mono text-xs text-sky-600 dark:text-sky-400">PostgreSQL RPC (`execute_bid`)</td>
+        <td className="px-4 py-3">Row-level locking (`FOR UPDATE`) preventing race conditions</td>
+      </tr>
+      <tr className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 transition-colors">
+        <td className="px-4 py-3 font-semibold text-zinc-900 dark:text-zinc-200">Rules Validation</td>
+        <td className="px-4 py-3 font-mono text-xs text-sky-600 dark:text-sky-400">TypeScript Auction Engine</td>
+        <td className="px-4 py-3">Dynamic bid steps, ₹120 Cr budget, & overseas quotas</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ---
 
 ### Outcomes and Performance
-*   **Concurrence**: Successfully tested with 10 concurrent active users bid-spamming on a single lobby.
-*   **Data Integrity**: Zero instances of budget overdrafts or over-quota squad selections.
-*   **RSC Optimization**: Using Next.js Server Components, static marketing content loads instantly, keeping the final bundle size small and responsive.
+*   **Concurrence & Speed**: Tested under multi-user bid spamming with zero data corruption or purse overdrafts.
+*   **Data Integrity**: 100% enforcement of purse caps, player set transitions, and overseas limits.
+*   **Dynamic UI**: High performance client rendering with Framer Motion animations for SOLD / UNSOLD reveals.

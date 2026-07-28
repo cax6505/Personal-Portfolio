@@ -120,11 +120,19 @@ export function CommandPalette() {
           <CommandGroup heading="Project Case Studies">
             <CommandItem
               onSelect={() =>
+                runCommand(() => router.push("/projects/modelroute"))
+              }
+            >
+              <FileText className="mr-2 h-4 w-4" />
+              <span>ModelRoute LLM Router (Case Study)</span>
+            </CommandItem>
+            <CommandItem
+              onSelect={() =>
                 runCommand(() => router.push("/projects/ipl-auction-pro"))
               }
             >
               <FileText className="mr-2 h-4 w-4" />
-              <span>IPL Auction Pro (Case Study)</span>
+              <span>DraftForge IPL Simulator (Case Study)</span>
             </CommandItem>
             <CommandItem
               onSelect={() =>
@@ -135,6 +143,14 @@ export function CommandPalette() {
             >
               <FileText className="mr-2 h-4 w-4" />
               <span>Predictive Sales Analytics (Case Study)</span>
+            </CommandItem>
+            <CommandItem
+              onSelect={() =>
+                runCommand(() => router.push("/projects/tricore-fs"))
+              }
+            >
+              <FileText className="mr-2 h-4 w-4" />
+              <span>SaveSpace File System (Case Study)</span>
             </CommandItem>
           </CommandGroup>
 
