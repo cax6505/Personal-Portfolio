@@ -59,6 +59,34 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </a>
     ),
+    table: ({ children }) => (
+      <div className="my-6 w-full overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+        <table className="w-full text-left text-sm text-zinc-600 dark:text-zinc-400">
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }) => (
+      <thead className="bg-zinc-100/80 dark:bg-zinc-900/80 text-xs font-semibold text-zinc-900 dark:text-zinc-200 uppercase tracking-wider border-b border-zinc-200 dark:border-zinc-800">
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }) => (
+      <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800/60 bg-white/50 dark:bg-zinc-950/40">
+        {children}
+      </tbody>
+    ),
+    tr: ({ children }) => (
+      <tr className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/30 transition-colors">
+        {children}
+      </tr>
+    ),
+    th: ({ children }) => (
+      <th className="px-4 py-3 font-semibold text-zinc-900 dark:text-zinc-100">
+        {children}
+      </th>
+    ),
+    td: ({ children }) => <td className="px-4 py-3 text-sm">{children}</td>,
     ...components,
   };
 }
