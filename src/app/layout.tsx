@@ -6,7 +6,6 @@ import { NavigationHeader } from "@/components/navigation-header";
 import { Github, Linkedin, Mail } from "lucide-react";
 import "./globals.css";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { ThreeBackground } from "@/components/ui/three-background";
 
 const sansFont = Inter({
   variable: "--font-sans",
@@ -91,10 +90,7 @@ export default function RootLayout({
             {/* Tactile Grain Overlay */}
             <div className="bg-grain" />
 
-            {/* 3D WebGL Background Canvas with Changing Color Lights */}
-            <ThreeBackground />
-
-            {/* Aurora Fluid Gradient Overlay */}
+            {/* Background Beams and Grid System (Aceternity UI) */}
             <AuroraBackground />
 
             {children}
