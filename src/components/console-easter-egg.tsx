@@ -14,15 +14,14 @@ export function ConsoleEasterEgg() {
  | . \\ |_| | |___| |___ | | | |___ |  _  |  _  |  _  |/ ___ \\ 
  |_|\\_\\___/|_____|_____|___| \\____||_| |_|_| |_|_| |_/_/   \\_\\
                                                               
- 👋 Welcome to Kolli Charan Adithya's Portfolio DevTools!
- Type \`kolli\` in the console to explore developer methods.
+ 👋 Welcome to Charan Adithya's Portfolio DevTools!
+ Type \`charan\` or \`kolli\` in the console to explore developer methods.
 `;
 
     console.log(`%c${asciiArt}`, "color: #8b5cf6; font-weight: bold; font-family: monospace;");
 
-    // Bind window.kolli API
-    (window as unknown as Record<string, unknown>).kolli = {
-      name: "Kolli Charan Adithya",
+    const charanApi = {
+      name: "Charan Adithya",
       role: "Frontend / Fullstack Engineer & AI Enthusiast",
       email: "adithyakolli55@gmail.com",
       github: "https://github.com/cax6505",
@@ -42,6 +41,9 @@ export function ConsoleEasterEgg() {
         return "Terminal opened!";
       }
     };
+
+    (window as unknown as Record<string, unknown>).charan = charanApi;
+    (window as unknown as Record<string, unknown>).kolli = charanApi;
   }, []);
 
   return null;

@@ -18,11 +18,11 @@ const displayFont = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Kolli Charan Adithya | Frontend Engineer & AI/ML Developer",
+  title: "Charan Adithya | Frontend Engineer & AI/ML Developer",
   description:
-    "Portfolio of Kolli Charan Adithya, a B.Tech Computer Science & AI student and developer specialized in frontend engineering, React/Next.js platforms, and machine learning pipelines.",
+    "Portfolio of Charan Adithya, a B.Tech Computer Science & AI student and developer specialized in frontend engineering, React/Next.js platforms, and machine learning pipelines.",
   keywords: [
-    "Kolli Charan Adithya",
+    "Charan Adithya",
     "Frontend Engineer",
     "AI/ML Developer",
     "React Developer",
@@ -30,20 +30,20 @@ export const metadata: Metadata = {
     "TypeScript",
     "Computer Science Student",
   ],
-  authors: [{ name: "Kolli Charan Adithya" }],
-  creator: "Kolli Charan Adithya",
+  authors: [{ name: "Charan Adithya" }],
+  creator: "Charan Adithya",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://cax6505.vercel.app",
-    title: "Kolli Charan Adithya | Frontend Engineer & AI/ML Developer",
+    title: "Charan Adithya | Frontend Engineer & AI/ML Developer",
     description:
       "B.Tech CS & AI developer with frontend internship experience at IIT Roorkee and ML expertise from Amazon ML Summer School.",
-    siteName: "Kolli Charan Adithya Portfolio",
+    siteName: "Charan Adithya Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kolli Charan Adithya | Frontend Engineer & AI/ML Developer",
+    title: "Charan Adithya | Frontend Engineer & AI/ML Developer",
     description:
       "B.Tech CS & AI developer with frontend internship experience at IIT Roorkee and ML expertise from Amazon ML Summer School.",
   },
@@ -100,12 +100,12 @@ export default function RootLayout({
           <footer className="w-full border-t border-zinc-200 dark:border-zinc-800 py-8 bg-zinc-50/80 dark:bg-zinc-950/60 transition-colors">
             <div className="container mx-auto max-w-6xl px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500 dark:text-zinc-400">
               <div className="text-center md:text-left">
-                <p>© {new Date().getFullYear()} Kolli Charan Adithya. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Charan Adithya. All rights reserved.</p>
                 <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">Designed & engineered with Next.js 15 + Tailwind CSS v4</p>
               </div>
               <div className="flex items-center gap-6">
                 <a
-                  href="mailto:kolli.c23csai@nst.rishihood.edu.in"
+                  href="mailto:adithyakolli55@gmail.com"
                   className="hover:text-zinc-900 dark:hover:text-zinc-100 hover-trigger flex items-center gap-1.5 transition-colors"
                 >
                   <Mail className="size-3.5" />

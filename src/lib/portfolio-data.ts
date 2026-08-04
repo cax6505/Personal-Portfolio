@@ -6,8 +6,8 @@
 // Hero
 // ---------------------------------------------------------------------------
 export const HERO_DATA = {
-  name: "Kolli Charan Adithya",
-  firstName: "Kolli Charan",
+  name: "Charan Adithya",
+  firstName: "Charan",
   lastName: "Adithya",
   tagline:
     "Product Engineer & AI/ML Specialist. B.Tech Computer Science & AI student at Newton School of Technology (Rishihood University).",

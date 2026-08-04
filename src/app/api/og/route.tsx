@@ -5,7 +5,7 @@ export const runtime = "edge";
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const title = searchParams.get("title") || "Kolli Charan Adithya — Portfolio";
+    const title = searchParams.get("title") || "Charan Adithya — Portfolio";
     const desc = searchParams.get("desc") || "Frontend/Full-stack Engineer & AI/ML Enthusiast";
 
     return new ImageResponse(
@@ -36,7 +36,7 @@ export async function GET(request: Request) {
               }}
             />
             <span style={{ fontSize: "20px", fontFamily: "monospace", color: "#a1a1aa", textTransform: "uppercase" }}>
-              Kolli Charan Adithya • Portfolio
+              Charan Adithya • Portfolio
             </span>
           </div>
 

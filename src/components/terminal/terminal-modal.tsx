@@ -21,7 +21,7 @@ export function TerminalModal() {
       command: "welcome",
       output: (
         <div className="space-y-1 text-zinc-300">
-          <p className="text-emerald-400 font-bold">Kolli Zsh Shell v2.6.0 (arm64-apple-darwin)</p>
+          <p className="text-emerald-400 font-bold">Charan Zsh Shell v2.6.0 (arm64-apple-darwin)</p>
           <p className="text-xs text-zinc-400">Type <span className="text-amber-300 font-bold">help</span> to see available commands or <span className="text-amber-300 font-bold">exit</span> to close.</p>
         </div>
       ),
@@ -230,7 +230,7 @@ export function TerminalModal() {
                 <div className="size-3 rounded-full bg-emerald-500" />
                 <span className="ml-2 text-xs font-semibold text-zinc-400 flex items-center gap-1.5">
                   <TerminalIcon className="size-3.5 text-emerald-400" />
-                  kolli@macbook-pro: ~ (zsh)
+                  charan@macbook-pro: ~ (zsh)
                 </span>
               </div>
 
@@ -253,7 +253,7 @@ export function TerminalModal() {
                 <div key={item.id} className="space-y-1.5">
                   {item.command !== "welcome" && (
                     <div className="flex items-center gap-2 text-zinc-400 text-xs">
-                      <span className="text-emerald-400 font-bold">kolli@portfolio</span>
+                      <span className="text-emerald-400 font-bold">charan@portfolio</span>
                       <span className="text-zinc-500">:</span>
                       <span className="text-sky-400">~</span>
                       <span className="text-zinc-300">$ {item.command}</span>
@@ -265,7 +265,7 @@ export function TerminalModal() {
 
               {/* Active Prompt Line */}
               <form onSubmit={handleCommandSubmit} className="flex items-center gap-2 pt-1 text-xs">
-                <span className="text-emerald-400 font-bold">kolli@portfolio</span>
+                <span className="text-emerald-400 font-bold">charan@portfolio</span>
                 <span className="text-zinc-500">:</span>
                 <span className="text-sky-400">~</span>
                 <span className="text-zinc-300">$</span>

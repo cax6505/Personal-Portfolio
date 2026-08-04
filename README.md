@@ -1,4 +1,4 @@
-# Personal Portfolio Website — Kolli Charan Adithya
+# Personal Portfolio Website — Charan Adithya
 
 A premium, high-performance, and typography-led personal portfolio website built for a Computer Science + AI student/developer. The design features a dark-mode default theme, custom cursor tracking, command palette search shortcuts, and real-time GitHub integration.
 
