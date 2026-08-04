@@ -84,7 +84,7 @@ export function TerminalModal() {
       case "about":
         output = (
           <p className="text-xs text-zinc-300 leading-relaxed">
-            Computer Science & Artificial Intelligence student at Newton School of Technology (CGPA 7.24/10.0) & Product Engineer Intern at IIT Roorkee (SSF). Specialized in React/Next.js platforms, concurrency-safe distributed systems, and LLM routing engines.
+            Computer Science & Artificial Intelligence student at Newton School of Technology & Product Engineer Intern at IIT Roorkee (SSF). Specialized in React/Next.js platforms, concurrency-safe distributed systems, and LLM routing engines.
           </p>
         );
         break;

@@ -34,7 +34,7 @@ export interface AboutCard {
 }
 
 export const ABOUT_SUMMARY =
-  "Computer Science & Artificial Intelligence student at Newton School of Technology (CGPA 7.24/10.0) with hands-on experience as a Product Engineer Intern at IIT Roorkee (SSF). Specialized in building high-throughput React/Next.js platforms, concurrency-safe distributed state engines, and intelligent LLM routing gateways. Selected among top 3,000 nationwide in the Amazon ML Summer School (top 2.3%).";
+  "Computer Science & Artificial Intelligence student at Newton School of Technology with hands-on experience as a Product Engineer Intern at IIT Roorkee (SSF). Specialized in building high-throughput React/Next.js platforms, concurrency-safe distributed state engines, and intelligent LLM routing gateways. Selected among top 3,000 nationwide in the Amazon ML Summer School (top 2.3%).";
 
 export const ABOUT_CARDS: AboutCard[] = [
   {
@@ -42,7 +42,7 @@ export const ABOUT_CARDS: AboutCard[] = [
     title: "Academic Foundation",
     detail: "B.Tech in CS & AI (2023 – Present)",
     description:
-      "Newton School of Technology, Rishihood University. Current CGPA: 7.24 / 10.0. Core study in software engineering, data structures & algorithms, operating systems, and artificial intelligence.",
+      "Newton School of Technology, Rishihood University. Core study in software engineering, data structures & algorithms, operating systems, and artificial intelligence.",
     colorClass:
       "text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/10 border-emerald-500/20",
     glowClass: "from-emerald-500/10",
