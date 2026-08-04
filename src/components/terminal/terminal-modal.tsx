@@ -84,7 +84,7 @@ export function TerminalModal() {
       case "about":
         output = (
           <p className="text-xs text-zinc-300 leading-relaxed">
-            Frontend & Full-stack Engineer with expertise in React, Next.js, TypeScript, Tailwind, Python, and Machine Learning. CS + AI student at SRM University.
+            Computer Science & Artificial Intelligence student at Newton School of Technology (CGPA 7.24/10.0) & Product Engineer Intern at IIT Roorkee (SSF). Specialized in React/Next.js platforms, concurrency-safe distributed systems, and LLM routing engines.
           </p>
         );
         break;
@@ -92,10 +92,10 @@ export function TerminalModal() {
       case "projects":
         output = (
           <ul className="space-y-1.5 text-xs font-mono text-zinc-300">
-            <li>🚀 <span className="text-sky-400 font-bold">modelroute</span> - Multi-LLM intelligent dynamic router</li>
-            <li>🏏 <span className="text-indigo-400 font-bold">ipl-auction-pro</span> - Real-time auction simulator platform</li>
-            <li>📈 <span className="text-emerald-400 font-bold">predictive-sales-analytics</span> - ML forecasting engine</li>
-            <li>⚡ <span className="text-amber-400 font-bold">tricore-fs</span> - High throughput async file system driver</li>
+            <li>🏏 <span className="text-indigo-400 font-bold">DraftForge</span> - Concurrency-safe IPL Mega Auction Simulator</li>
+            <li>🚀 <span className="text-sky-400 font-bold">ModelRoute</span> - High-throughput LLM routing engine & API gateway</li>
+            <li>📈 <span className="text-emerald-400 font-bold">Predictive Sales Analytics</span> - Leakage-safe ML repeat purchase engine</li>
+            <li>⚡ <span className="text-amber-400 font-bold">SaveSpace</span> - Visual OS file system simulator & smart folder organiser</li>
           </ul>
         );
         break;
@@ -104,12 +104,10 @@ export function TerminalModal() {
         output = (
           <div className="space-y-2 text-xs text-zinc-300">
             <div>
-              <span className="font-bold text-white">Associate Software Engineer</span> @ Standard Chartered Bank
-              <p className="text-zinc-400">June 2025 – Present | Fullstack & Cloud Infrastructure</p>
-            </div>
-            <div>
-              <span className="font-bold text-white">Full Stack Engineering Intern</span> @ Trade Brains
-              <p className="text-zinc-400">Oct 2024 – Nov 2024 | Next.js & Financial Dashboards</p>
+              <span className="font-bold text-white">Product Engineer Intern</span> @ IIT Roorkee (SSF)
+              <p className="text-zinc-400">Nov 2024 – Apr 2025 | Next.js, TypeScript, REST APIs, Cypress, Figma</p>
+              <p className="text-zinc-500 text-[11px]">• Reduced bundle size & improved low-bandwidth performance for 260M+ users.</p>
+              <p className="text-zinc-500 text-[11px]">• Lifted completion rate by 40% with personalized ML scheme matching engine.</p>
             </div>
           </div>
         );
@@ -118,9 +116,11 @@ export function TerminalModal() {
       case "skills":
         output = (
           <div className="text-xs text-zinc-300 space-y-1">
-            <p><span className="text-violet-400 font-bold">Languages:</span> TypeScript, JavaScript, Python, C++, SQL, HTML/CSS</p>
-            <p><span className="text-violet-400 font-bold">Frontend:</span> React 19, Next.js 16, Tailwind v4, Framer Motion, Redux</p>
-            <p><span className="text-violet-400 font-bold">Backend/AI:</span> Node.js, Express, PyTorch, Scikit-learn, FastAPI, PostgreSQL</p>
+            <p><span className="text-violet-400 font-bold">Languages:</span> TypeScript, JavaScript, Python, SQL</p>
+            <p><span className="text-violet-400 font-bold">Frameworks:</span> React, Next.js, Node.js, Express.js, Tailwind CSS</p>
+            <p><span className="text-violet-400 font-bold">Databases & APIs:</span> PostgreSQL, Prisma, Supabase, REST APIs, WebSockets, JWT/OAuth</p>
+            <p><span className="text-violet-400 font-bold">Tools:</span> Git, GitHub, Vercel, Docker, AWS (EC2, S3), Cypress, Figma</p>
+            <p><span className="text-violet-400 font-bold">Machine Learning:</span> Pandas, TensorFlow, Scikit-Learn, CNN, Transfer Learning</p>
           </div>
         );
         break;
@@ -129,7 +129,8 @@ export function TerminalModal() {
         output = (
           <div className="text-xs font-mono text-zinc-300 space-y-1">
             <p>📧 Email: <a href="mailto:adithyakolli55@gmail.com" className="text-sky-400 underline">adithyakolli55@gmail.com</a></p>
-            <p>🐙 GitHub: <a href="https://github.com/KolliCharanAdithya" target="_blank" className="text-sky-400 underline">github.com/KolliCharanAdithya</a></p>
+            <p>📞 Phone: <span className="text-zinc-300">+91 79959 49632</span></p>
+            <p>🐙 GitHub: <a href="https://github.com/cax6505" target="_blank" className="text-sky-400 underline">github.com/cax6505</a></p>
             <p>💼 LinkedIn: <a href="https://linkedin.com/in/charan-adithya-kolli" target="_blank" className="text-sky-400 underline">linkedin.com/in/charan-adithya-kolli</a></p>
           </div>
         );

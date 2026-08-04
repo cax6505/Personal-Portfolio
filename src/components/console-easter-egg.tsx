@@ -27,8 +27,9 @@ export function ConsoleEasterEgg() {
       email: "adithyakolli55@gmail.com",
       github: "https://github.com/cax6505",
       getSkills: () => [
-        "TypeScript", "React 19", "Next.js 16", "Tailwind CSS v4",
-        "Python", "PyTorch", "FastAPI", "PostgreSQL", "Supabase"
+        "TypeScript", "React", "Next.js", "Tailwind CSS",
+        "Node.js", "Express.js", "PostgreSQL", "Supabase", "Prisma",
+        "Python", "TensorFlow", "Scikit-Learn", "Cypress", "Docker", "AWS"
       ],
       getProjects: () => [
         { name: "ModelRoute", desc: "Multi-LLM router & circuit breaker" },

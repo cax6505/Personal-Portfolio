@@ -1,27 +1,23 @@
 // =============================================================================
-// Portfolio Data — Single Source of Truth
-// =============================================================================
-// All portfolio content lives here. Both the scroll-based sections (/)
-// and the 3D world (/explore) import from this file.
-// To add new content (projects, skills, etc.), update this file and both
-// experiences will reflect it automatically.
+// Portfolio Data — Single Source of Truth (Synchronized with Official Resume)
 // =============================================================================
 
 // ---------------------------------------------------------------------------
 // Hero
 // ---------------------------------------------------------------------------
 export const HERO_DATA = {
-  name: "Charan Adithya",
-  firstName: "Charan",
+  name: "Kolli Charan Adithya",
+  firstName: "Kolli Charan",
   lastName: "Adithya",
   tagline:
-    'Frontend/Full-stack Engineer & AI/ML enthusiast. B.Tech Computer Science + AI student at Newton School of Technology (Rishihood University).',
-  university: "Newton School of Technology",
-  availabilityLabel: "Open for internships & collaborations",
+    "Product Engineer & AI/ML Specialist. B.Tech Computer Science & AI student at Newton School of Technology (Rishihood University).",
+  university: "Newton School of Technology, Rishihood University",
+  availabilityLabel: "Open for engineering roles & collaborations",
   socials: {
     github: "https://github.com/cax6505",
-    linkedin: "https://linkedin.com/in/charank6505",
-    email: "mailto:kolli.c23csai@nst.rishihood.edu.in",
+    linkedin: "https://linkedin.com/in/charan-adithya-kolli",
+    email: "mailto:adithyakolli55@gmail.com",
+    phone: "tel:+917995949632",
   },
 } as const;
 
@@ -38,38 +34,38 @@ export interface AboutCard {
 }
 
 export const ABOUT_SUMMARY =
-  "Full Stack Developer & AI/ML Enthusiast with 6 months of experience at IIT Roorkee shipping production features for a platform serving 50K+ users, and selected for the Amazon ML Summer School (top 2.3%). Skilled in React, React Native, Node.js, Express.js, TypeScript, Python, scikit-learn, TensorFlow, Feature Engineering, and MySQL - building scalable web/mobile apps with clean APIs, real-time features, and data-driven machine learning pipelines.";
+  "Computer Science & Artificial Intelligence student at Newton School of Technology (CGPA 7.24/10.0) with hands-on experience as a Product Engineer Intern at IIT Roorkee (SSF). Specialized in building high-throughput React/Next.js platforms, concurrency-safe distributed state engines, and intelligent LLM routing gateways. Selected among top 3,000 nationwide in the Amazon ML Summer School (top 2.3%).";
 
 export const ABOUT_CARDS: AboutCard[] = [
   {
     iconName: "GraduationCap",
     title: "Academic Foundation",
-    detail: "B.Tech in CS & AI",
+    detail: "B.Tech in CS & AI (2023 – Present)",
     description:
-      "Newton School of Technology, Rishihood University (2023 - 2027). Current CGPA: 7.24/10. Studying core software engineering principles, algorithms, and practical artificial intelligence frameworks.",
+      "Newton School of Technology, Rishihood University. Current CGPA: 7.24 / 10.0. Core study in software engineering, data structures & algorithms, operating systems, and artificial intelligence.",
     colorClass:
       "text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/10 border-emerald-500/20",
     glowClass: "from-emerald-500/10",
   },
   {
-    iconName: "BrainCircuit",
-    title: "AI/ML Specialization",
-    detail: "Amazon ML Summer School Selection",
-    description:
-      "Selected as one of the top 3,000 students out of 130,000+ applicants (~2.3% acceptance rate) for advanced lectures in machine learning algorithms, deep learning models, and production-scale MLOps.",
-    colorClass:
-      "text-violet-500 dark:text-violet-400 bg-violet-500/10 dark:bg-violet-500/10 border-violet-500/20",
-    glowClass: "from-violet-500/10",
-  },
-  {
     iconName: "Code2",
-    title: "Full-Stack Engineering",
-    detail: "TypeScript & Next.js Focus",
+    title: "Product Engineering",
+    detail: "IIT Roorkee Intern (260M+ Users)",
     description:
-      "Engineered responsive user interfaces and robust state systems. Passionate about frontend performance tuning, server-side caching (ISR/RSC), real-time WebSockets synchronization, and Cypress E2E test coverage.",
+      "Shipped code-split React/Next.js portals serving government schemes, scholarships, and job listings. Boosted application completion rates by 40% via ML recommendation engines and authored 50+ Cypress E2E tests.",
     colorClass:
       "text-sky-500 dark:text-sky-400 bg-sky-500/10 dark:bg-sky-500/10 border-sky-500/20",
     glowClass: "from-sky-500/10",
+  },
+  {
+    iconName: "BrainCircuit",
+    title: "AI/ML Specialization",
+    detail: "Amazon ML Summer School (Top 2.3%)",
+    description:
+      "Selected among top 3,000 applicants out of 130,000+ candidates (~2.3% acceptance rate) for advanced lectures in machine learning algorithms, deep learning models, transfer learning, and production MLOps.",
+    colorClass:
+      "text-violet-500 dark:text-violet-400 bg-violet-500/10 dark:bg-violet-500/10 border-violet-500/20",
+    glowClass: "from-violet-500/10",
   },
 ];
 
@@ -85,24 +81,14 @@ export interface ExperienceEntry {
 
 export const EXPERIENCES_DATA: ExperienceEntry[] = [
   {
-    role: "Frontend Intern",
-    company: "IIT Roorkee (Remote)",
-    period: "Jan 2025 – Apr 2025",
+    role: "Product Engineer Intern",
+    company: "IIT Roorkee (SSF) — Remote",
+    period: "Nov 2024 – Apr 2025",
     points: [
-      "Led the engineering of a React-based application portal connecting over 50,000+ users with government schemes, scholarships, and job opportunities.",
-      "Optimized code splitting, route prefetching, and asset lazy-loading, ensuring fast load times on low-bandwidth networks in rural areas.",
-      "Designed and implemented a data-driven recommendation engine for application suggestions, boosting overall form completion rates by 40%.",
-      "Wrote more than 50+ robust Cypress End-to-End (E2E) integration tests, securing critical pathways (auth, forms, profiles) and decreasing build failures.",
-    ],
-  },
-  {
-    role: "Product and Design Intern",
-    company: "IIT Roorkee (Remote)",
-    period: "Nov 2024 – Jan 2025",
-    points: [
-      "Collaborated closely with 3 software engineers to implement pixel-perfect Figma designs across 10+ core layout components.",
-      "Built a mobile-first responsive user interface adapted for high usability across all handheld devices, catering to a base of 50K+ active users.",
-      "Designed and validated clean, accessible sign-up and login workflows with streamlined multi-step verification inputs.",
+      "Reduced initial bundle size and improved load times on low-bandwidth networks by implementing code-splitting and lazy-loading in a React portal serving government schemes, scholarships, and job listings.",
+      "Lifted application completion rate by 40% by designing and shipping a recommendation engine that personalizes scheme/job matching using user profile data and behavioral signals.",
+      "Cut production regressions by building a Python scraping pipeline to ingest & normalize scheme data from government portals, and authoring 50+ Cypress E2E tests covering critical user flows.",
+      "Designed a mobile-first UI/UX system in Figma (0-to-1 screens) and translated it into a reusable React component library adopted platform-wide for 260M+ users.",
     ],
   },
 ];
@@ -124,43 +110,21 @@ export interface ProjectItem {
 
 export const PROJECTS_DATA: ProjectItem[] = [
   {
-    title: "ModelRoute — Enterprise LLM Routing Engine",
-    slug: "modelroute",
-    repoKey: "modelroute",
-    description:
-      "Enterprise-grade LLM routing system dynamically classifying user prompts and dispatching requests across Groq, Gemini, and local models based on intent, cost, latency, and capability constraints.",
-    longDescription:
-      "Built with Next.js 15, TypeScript, Tailwind CSS, Upstash Redis, Supabase (PostgreSQL), and Vitest. Features a hybrid classification engine across 8 task categories, stateful Circuit Breaker resilience (CLOSED/OPEN/HALF_OPEN), SHA-256 API key authentication, sliding-window rate limiting, and real-time SSE streaming metrics.",
-    tech: [
-      "Next.js 15",
-      "TypeScript",
-      "Tailwind CSS",
-      "Upstash Redis",
-      "Supabase",
-      "Vitest",
-      "Groq API",
-      "Gemini API",
-    ],
-    githubUrl: "https://github.com/cax6505/ModelRoute",
-    languageColor:
-      "text-sky-500 dark:text-sky-400 bg-sky-500/10 dark:bg-sky-500/10 border-sky-500/20",
-    glowClass: "from-sky-500/10",
-  },
-  {
     title: "DraftForge — IPL Mega Auction Simulator",
     slug: "ipl-auction-pro",
     repoKey: "ipl",
     description:
-      "Real-time multiplayer cricket manager IPL Mega Auction simulator with sub-second bidding sync, atomic postgres concurrency, and rule-based squad engines.",
+      "Real-time multiplayer cricket manager draft room with concurrency-safe bidding engine, Postgres CDC, and WebSocket synchronization.",
     longDescription:
-      "Built using Next.js, TypeScript, Tailwind CSS, Supabase Realtime, and PostgreSQL. Features real-time multi-client war rooms, atomic PostgreSQL concurrency via database RPC transactions (execute_bid), official IPL bidding ladder increments, ₹120 Cr purse & squad limits, public/private 6-digit room discovery, and live chat feed.",
+      "Built a concurrency-safe bidding engine (PostgreSQL stored procedure + SELECT ... FOR UPDATE) that serializes bids across 10 concurrent players while enforcing purse and quota rules — zero race conditions. Designed an idempotent auction state-machine with optimistic concurrency guards that prevents double-advancement on timer expiry using a staggered host/peer trigger protocol. Architected real-time sync across 5 Postgres tables via CDC over filtered WebSocket channels (Presence + Broadcast) for consistent state across 10 concurrent clients.",
     tech: [
       "Next.js",
       "TypeScript",
       "Tailwind CSS",
       "Supabase",
-      "WebSockets",
       "PostgreSQL",
+      "WebSockets",
+      "Postgres CDC",
     ],
     githubUrl: "https://github.com/cax6505/IPL-Auction-simulator",
     languageColor:
@@ -168,11 +132,33 @@ export const PROJECTS_DATA: ProjectItem[] = [
     glowClass: "from-indigo-500/10",
   },
   {
+    title: "ModelRoute — LLM Routing Engine & API Gateway",
+    slug: "modelroute",
+    repoKey: "modelroute",
+    description:
+      "High-throughput API gateway and LLM routing engine classifying prompt intent in sub-millisecond regex across 8 task categories.",
+    longDescription:
+      "Built a high-throughput API gateway + LLM routing engine that classifies prompt intent in sub-millisecond regex across 8 task categories and dispatches to the optimal provider (Groq / Gemini / Ollama) by latency, cost, and SLA. Implemented a state-machine Circuit Breaker with exponential backoff for zero-downtime failover, plus SHA-256 key authentication and Redis sliding-window rate limiting. Delivered real-time token streaming via Server-Sent Events (SSE) and enforced strict runtime schema checks at every boundary with a Zod-validated REST API layer.",
+    tech: [
+      "TypeScript",
+      "Next.js 15",
+      "PostgreSQL",
+      "Upstash Redis",
+      "Groq",
+      "Gemini",
+      "Ollama",
+    ],
+    githubUrl: "https://github.com/cax6505/ModelRoute",
+    languageColor:
+      "text-sky-500 dark:text-sky-400 bg-sky-500/10 dark:bg-sky-500/10 border-sky-500/20",
+    glowClass: "from-sky-500/10",
+  },
+  {
     title: "Predictive Sales Analytics Engine",
     slug: "predictive-sales-analytics",
     repoKey: "sales",
     description:
-      "Leakage-safe MLOps machine learning pipeline predicting repeat customer purchases within 180 days, achieving 1.57x lift over random baseline.",
+      "Leakage-safe customer repeat purchase forecasting pipeline predicting 180-day returns with 1.57x precision lift.",
     longDescription:
       "Built using Python, scikit-learn, Random Forest, TF-IDF, Pandas, YAML Configs, and MLOps principles. Features strict temporal train/val/test splits, freight ratio engineering, review embeddings, and class imbalance handling (97:3).",
     tech: [
@@ -195,7 +181,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     slug: "tricore-fs",
     repoKey: "tricore",
     description:
-      "Interactive educational web app for understanding file systems through visual disk block mapping, allocation strategy comparison, and a smart file organizer — all built to teach core OS concepts hands-on.",
+      "Interactive OS education platform simulating disk block allocation, inode inspection, and smart file organization.",
     longDescription:
       "Built using Next.js, TypeScript, Tailwind CSS, and deployed on Vercel. Features a visual file system simulator with Contiguous, Linked, Indexed, FAT, and Unix-style allocation strategies, fragmentation visualization, inode metadata inspection, a Finder-style smart file organizer, and a standalone npm CLI package.",
     tech: [
@@ -203,8 +189,8 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "TypeScript",
       "Tailwind CSS",
       "Node.js",
-      "CSS",
       "Vercel",
+      "npm CLI",
     ],
     githubUrl: "https://github.com/cax6505/TriCore-FS",
     languageColor:
@@ -228,85 +214,72 @@ export const SKILLS_DATA: SkillGroup[] = [
   {
     category: "Languages",
     iconName: "Code2",
-    items: ["TypeScript", "JavaScript", "Python"],
+    items: ["TypeScript", "JavaScript", "Python", "SQL"],
     colorClass:
       "text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/10 border-emerald-500/20",
     glowClass: "from-emerald-500/5",
   },
   {
-    category: "Frameworks & UI",
+    category: "Frameworks",
     iconName: "Layers",
     items: [
       "React",
-      "React Native",
-      "Next.js 15",
+      "Next.js",
       "Node.js",
       "Express.js",
       "Tailwind CSS",
-      "Framer Motion",
-      "Zod",
     ],
     colorClass:
       "text-sky-500 dark:text-sky-400 bg-sky-500/10 dark:bg-sky-500/10 border-sky-500/20",
     glowClass: "from-sky-500/5",
   },
   {
-    category: "ML & Deep Learning",
-    iconName: "BrainCircuit",
-    items: [
-      "LLMs & Prompt Engineering",
-      "Groq & Gemini APIs",
-      "scikit-learn",
-      "TensorFlow",
-      "Keras",
-      "EfficientNetB0",
-      "Transfer Learning",
-      "Random Forest",
-    ],
-    colorClass:
-      "text-violet-500 dark:text-violet-400 bg-violet-500/10 dark:bg-violet-500/10 border-violet-500/20",
-    glowClass: "from-violet-500/5",
-  },
-  {
-    category: "ML Engineering",
-    iconName: "Cpu",
-    items: [
-      "LLM Routing & Orchestration",
-      "Circuit Breaker Resilience",
-      "Sliding-Window Rate Limiting",
-      "SSE Streaming APIs",
-      "Feature Engineering",
-      "Class Imbalance Handling",
-      "TF-IDF",
-    ],
-    colorClass:
-      "text-amber-500 dark:text-amber-400 bg-amber-500/10 dark:bg-amber-500/10 border-amber-500/20",
-    glowClass: "from-amber-500/5",
-  },
-  {
-    category: "Databases & ORMs",
+    category: "Databases & APIs",
     iconName: "Database",
-    items: ["MySQL", "PostgreSQL", "Upstash Redis", "Supabase", "Prisma"],
+    items: [
+      "PostgreSQL",
+      "Prisma",
+      "Supabase",
+      "Upstash Redis",
+      "REST APIs",
+      "WebSockets",
+      "JWT/OAuth",
+    ],
     colorClass:
       "text-indigo-500 dark:text-indigo-400 bg-indigo-500/10 dark:bg-indigo-500/10 border-indigo-500/20",
     glowClass: "from-indigo-500/5",
   },
   {
-    category: "Developer Tools",
+    category: "Tools & DevOps",
     iconName: "Wrench",
     items: [
       "Git",
       "GitHub",
-      "Vitest",
-      "Cypress",
-      "WebSockets",
-      "REST APIs",
       "Vercel",
+      "Docker",
+      "AWS (EC2, S3)",
+      "Cypress",
       "Figma",
     ],
     colorClass:
       "text-rose-500 dark:text-rose-400 bg-rose-500/10 dark:bg-rose-500/10 border-rose-500/20",
     glowClass: "from-rose-500/5",
+  },
+  {
+    category: "Machine Learning",
+    iconName: "BrainCircuit",
+    items: [
+      "Pandas",
+      "TensorFlow",
+      "Scikit-Learn",
+      "CNN",
+      "Transfer Learning",
+      "Groq & Gemini APIs",
+      "Ollama",
+    ],
+    colorClass:
+      "text-violet-500 dark:text-violet-400 bg-violet-500/10 dark:bg-violet-500/10 border-violet-500/20",
+    glowClass: "from-violet-500/5",
   },
 ];
 
@@ -328,30 +301,20 @@ export const ACHIEVEMENTS_DATA: AchievementHighlight[] = [
     metric: "Top 2.3%",
     title: "Amazon ML Summer School Selection",
     description:
-      "Competed and was selected among the top 3,000 high-potential candidates out of a massive nationwide pool of over 130,000+ applicants.",
+      "Selected among the top 3,000 out of 130,000+ applicants (~2.3% acceptance rate) for advanced machine learning, deep learning, and production MLOps training.",
     colorClass:
       "text-amber-500 dark:text-amber-400 bg-amber-500/10 dark:bg-amber-500/10 border-amber-500/20",
     glowClass: "from-amber-500/5",
   },
   {
-    iconName: "Target",
-    metric: "130,000+",
-    title: "Applicant Pool Size",
+    iconName: "Award",
+    metric: "3rd / 25 Teams",
+    title: "StealthFire Hackathon Finalist",
     description:
-      "Proved capabilities in core engineering and mathematics concepts to secure selection in one of the most selective ML schools in India.",
+      "Secured 3rd place out of 25 engineering teams by building a QR-based digital student ID system that solves lost-card recovery.",
     colorClass:
       "text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/10 border-emerald-500/20",
     glowClass: "from-emerald-500/5",
-  },
-  {
-    iconName: "Award",
-    metric: "ML Intensive",
-    title: "Advanced Curriculum",
-    description:
-      "Trained directly under Amazon scientists on Supervised Learning, Deep Learning, Dimensionality Reduction, LLMs, and Generative AI.",
-    colorClass:
-      "text-indigo-500 dark:text-indigo-400 bg-indigo-500/10 dark:bg-indigo-500/10 border-indigo-500/20",
-    glowClass: "from-indigo-500/5",
   },
 ];
 
@@ -359,14 +322,15 @@ export const ACHIEVEMENTS_DATA: AchievementHighlight[] = [
 // Contact
 // ---------------------------------------------------------------------------
 export const CONTACT_DATA = {
-  email: "kolli.c23csai@nst.rishihood.edu.in",
+  email: "adithyakolli55@gmail.com",
+  phone: "+91 79959 49632",
   formEndpoint: "/api/contact",
   subtitle:
-    "Have a question, an internship opportunity, or a project to build? Drop a message below.",
+    "Have an engineering role, an internship opportunity, or a project to build? Drop a message below.",
   socials: {
     github: "https://github.com/cax6505",
-    linkedin: "https://linkedin.com/in/charank6505",
-    email: "mailto:kolli.c23csai@nst.rishihood.edu.in",
+    linkedin: "https://linkedin.com/in/charan-adithya-kolli",
+    email: "mailto:adithyakolli55@gmail.com",
   },
 } as const;
 
