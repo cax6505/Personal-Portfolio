@@ -29,6 +29,8 @@ During high-frequency multiplayer bidding wars, state synchronization conflicts 
 
 <RealtimeBidSequence />
 
+<AuctionSimulator />
+
 #### 1. Atomic Concurrency Protection via PostgreSQL RPC (`execute_bid`)
 To eliminate race conditions, bid validation and state execution are handled inside a PostgreSQL Database Function (RPC).
 *   Locks the active player row instantly using `SELECT ... FOR UPDATE`.

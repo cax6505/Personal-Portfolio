@@ -21,6 +21,13 @@ interface ProjectsClientProps {
   initialStats: Record<string, RepoStats>;
 }
 
+const PROJECT_METRICS: Record<string, string[]> = {
+  "modelroute": ["⚡ Sub-100ms Latency", "🛡️ Zero-Outage Circuit Breaker"],
+  "ipl-auction-pro": ["⚡ Sub-200ms WS Sync", "🔒 PostgreSQL Atomic RPC"],
+  "predictive-sales-analytics": ["📈 1.57x Precision Lift", "📉 -45% Ad Waste"],
+  "tricore-fs": ["⚡ 12.8k Ops/sec IO", "📦 Standalone npm Package"],
+};
+
 export function ProjectsClient({ initialStats }: ProjectsClientProps) {
   const projects = PROJECTS_DATA;
 
@@ -62,6 +69,7 @@ export function ProjectsClient({ initialStats }: ProjectsClientProps) {
               language: project.tech[0] || "TypeScript",
               url: project.githubUrl,
             };
+            const metrics = PROJECT_METRICS[project.slug] || [];
 
             return (
               <motion.div
@@ -78,11 +86,16 @@ export function ProjectsClient({ initialStats }: ProjectsClientProps) {
 
                   <CardContent className="p-8 flex flex-col justify-between h-full space-y-6">
                     <div className="space-y-4">
-                      {/* Top Header with language tag */}
-                      <div className="flex items-center">
+                      {/* Top Header with language tag & Metrics */}
+                      <div className="flex flex-wrap items-center gap-2">
                         <span className="text-[10px] font-mono tracking-wider uppercase font-semibold px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-white/[0.04] text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-white/5">
                           {stats.language}
                         </span>
+                        {metrics.map((m, mIdx) => (
+                          <span key={mIdx} className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20">
+                            {m}
+                          </span>
+                        ))}
                       </div>
 
                       {/* Title */}

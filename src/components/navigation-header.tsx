@@ -4,13 +4,28 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, Terminal as TerminalIcon, Volume2, VolumeX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { isAudioMuted, toggleAudioMute, playClickSound, playToggleSound } from "@/lib/sound-effects";
 
 export function NavigationHeader() {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [muted, setMuted] = useState(() => isAudioMuted());
+
+  const handleToggleMute = () => {
+    const nextMuted = toggleAudioMute();
+    setMuted(nextMuted);
+    if (!nextMuted) {
+      playToggleSound();
+    }
+  };
+
+  const handleOpenTerminal = () => {
+    playClickSound();
+    window.dispatchEvent(new CustomEvent("open-terminal"));
+  };
 
   useEffect(() => {
     if (pathname.startsWith("/projects")) {
@@ -45,11 +60,6 @@ export function NavigationHeader() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
-
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -65,6 +75,7 @@ export function NavigationHeader() {
   const currentActiveSection = pathname.startsWith("/projects") ? "projects" : activeSection;
 
   const handleOpenSearch = () => {
+    playClickSound();
     window.dispatchEvent(new CustomEvent("open-command-palette"));
   };
 
@@ -79,10 +90,13 @@ export function NavigationHeader() {
   return (
     <>
       <header className="fixed top-4 left-1/2 -translate-x-1/2 z-30 w-fit rounded-full border border-zinc-300/60 dark:border-white/15 bg-white/75 dark:bg-white/[0.08] backdrop-blur-2xl shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_0_0_rgba(255,255,255,0.8)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.2)] transition-all duration-300">
-        <div className="px-4 md:px-6 h-14 flex items-center gap-4 md:gap-6">
+        <div className="px-3 md:px-5 h-14 flex items-center gap-3 md:gap-5">
           {/* Mobile Hamburger Button */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => {
+              playClickSound();
+              setMobileMenuOpen(!mobileMenuOpen);
+            }}
             className="md:hidden flex items-center justify-center size-9 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100/80 dark:bg-white/[0.04] text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200/80 dark:hover:bg-white/[0.08] transition-all duration-200"
             aria-label="Toggle navigation menu"
           >
@@ -90,13 +104,14 @@ export function NavigationHeader() {
           </button>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-5 text-sm font-medium">
             {navItems.map((item) => {
               const isActive = currentActiveSection === item.id;
               return (
                 <Link
                   key={item.id}
                   href={item.href}
+                  onClick={() => playClickSound()}
                   className={`hover-trigger transition-all duration-300 relative py-1 px-1.5 rounded-md ${
                     isActive
                       ? "text-zinc-950 dark:text-zinc-50 font-bold"
@@ -112,7 +127,7 @@ export function NavigationHeader() {
             })}
           </nav>
 
-          {/* Command Palette Trigger Button (Keyboard Hint) */}
+          {/* Command Palette Trigger Button */}
           <button
             onClick={handleOpenSearch}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 text-[10px] font-mono hover-trigger transition-all duration-300 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]"
@@ -121,6 +136,26 @@ export function NavigationHeader() {
             <Search className="size-3 text-zinc-400" />
             <span className="hidden sm:inline">Search</span>
             <kbd className="hidden sm:inline px-1.5 py-0.5 rounded bg-zinc-200/80 dark:bg-zinc-800/80 text-[8px] font-sans">⌘K</kbd>
+          </button>
+
+          {/* Terminal Launcher Icon */}
+          <button
+            onClick={handleOpenTerminal}
+            className="flex items-center justify-center size-8 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-zinc-600 dark:text-zinc-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:border-emerald-500/30 transition-all duration-200"
+            title="Open Zsh Terminal (or press T)"
+            aria-label="Open terminal shell"
+          >
+            <TerminalIcon className="size-3.5" />
+          </button>
+
+          {/* Web Audio Mute / Unmute Toggle */}
+          <button
+            onClick={handleToggleMute}
+            className="flex items-center justify-center size-8 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-zinc-600 dark:text-zinc-400 hover:text-violet-500 transition-all duration-200"
+            title={muted ? "Unmute Audio FX" : "Mute Audio FX"}
+            aria-label="Toggle UI sound effects"
+          >
+            {muted ? <VolumeX className="size-3.5 opacity-60" /> : <Volume2 className="size-3.5 text-violet-400 animate-pulse" />}
           </button>
 
           <div className="hidden md:block h-5 w-px bg-zinc-300 dark:bg-zinc-800" />

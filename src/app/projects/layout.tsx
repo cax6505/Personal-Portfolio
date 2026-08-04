@@ -1,19 +1,44 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { CodeCopier } from "@/components/ui/code-copier";
+import { TerminalModal } from "@/components/terminal/terminal-modal";
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 
 export default function ProjectsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [scrollPct, setScrollPct] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollPct((window.scrollY / totalHeight) * 100);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen py-16 md:py-24 bg-zinc-50/20 dark:bg-zinc-950/10">
+      {/* Reading Progress Indicator */}
+      <div
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-violet-500 via-indigo-500 to-emerald-400 z-50 transition-all duration-150"
+        style={{ width: `${scrollPct}%` }}
+      />
+
       <CodeCopier />
+      <KeyboardShortcuts />
+      <TerminalModal />
+
       <div className="container mx-auto max-w-3xl px-4">
         {/* Back navigation */}
         <motion.div

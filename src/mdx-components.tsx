@@ -1,8 +1,16 @@
 import type { MDXComponents } from "mdx/types";
 import React from "react";
+import { AuctionSimulator } from "@/components/widgets/auction-simulator";
+import { SalesForecastPlayground } from "@/components/widgets/sales-forecast-playground";
+import { ModelRouterVisualizer } from "@/components/widgets/model-router-visualizer";
+import { FsTopologyVisualizer } from "@/components/widgets/fs-topology-visualizer";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
+    AuctionSimulator,
+    SalesForecastPlayground,
+    ModelRouterVisualizer,
+    FsTopologyVisualizer,
     h1: ({ children }) => (
       <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mt-8 mb-4 font-display">
         {children}

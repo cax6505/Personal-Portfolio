@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HERO_DATA } from "@/lib/portfolio-data";
+import { HeroCanvas } from "@/components/ui/hero-canvas";
+import { playClickSound } from "@/lib/sound-effects";
 
 export function Hero() {
   const containerVariants = {
@@ -32,6 +34,9 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative flex min-h-screen items-center justify-center pt-24 pb-16 bg-transparent overflow-hidden">
+      {/* Dynamic Canvas Background Layer */}
+      <HeroCanvas />
+
       {/* Background radial glow overlay */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] rounded-full bg-violet-500/[0.04] dark:bg-violet-500/[0.04] blur-[140px] pointer-events-none -z-10" />
 
@@ -76,6 +81,7 @@ export function Hero() {
               href={HERO_DATA.socials.github}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => playClickSound()}
               className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
             >
               <Github className="size-3.5" />
@@ -85,6 +91,7 @@ export function Hero() {
               href={HERO_DATA.socials.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => playClickSound()}
               className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
             >
               <Linkedin className="size-3.5" />
@@ -92,6 +99,7 @@ export function Hero() {
             </a>
             <a
               href="#contact"
+              onClick={() => playClickSound()}
               className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
             >
               <Mail className="size-3.5" />
@@ -106,6 +114,7 @@ export function Hero() {
           >
             <Button
               asChild
+              onClick={() => playClickSound()}
               className="relative group bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-zinc-50 dark:text-zinc-950 font-medium px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-105"
             >
               <a href="#projects" className="flex items-center gap-2.5">

@@ -6,10 +6,17 @@ import { Projects } from "@/components/sections/projects";
 import { Skills } from "@/components/sections/skills";
 import { Achievements } from "@/components/sections/achievements";
 import { Contact } from "@/components/sections/contact";
+import { TerminalModal } from "@/components/terminal/terminal-modal";
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
+import { ConsoleEasterEgg } from "@/components/console-easter-egg";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen">
+      {/* Global Keyboard Navigation Listener & DevTools Console Banner */}
+      <KeyboardShortcuts />
+      <ConsoleEasterEgg />
+
       {/* Hero section */}
       <Hero />
 
@@ -19,7 +26,7 @@ export default function Home() {
       {/* Experience section */}
       <Experience />
 
-      {/* Projects section (Server Component fetching live GitHub stats) */}
+      {/* Projects section */}
       <Projects />
 
       {/* Skills section */}
@@ -30,6 +37,9 @@ export default function Home() {
 
       {/* Contact section */}
       <Contact />
+
+      {/* Interactive Zsh Terminal Shell Modal */}
+      <TerminalModal />
     </div>
   );
 }

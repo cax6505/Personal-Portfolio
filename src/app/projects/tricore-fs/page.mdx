@@ -25,6 +25,8 @@ Understanding file system internals — allocation strategies, fragmentation, in
 
 ### Engineering Solutions & Architecture
 
+<FsTopologyVisualizer />
+
 #### 1. Visual Disk Block Mapping & Allocation Strategies
 The simulator models core file system primitives — `Inode` (file metadata + block pointers), `Directory` (name → inode mapping), and `Disk` (block array + free bitmap). Users can create, delete, and inspect files while watching disk blocks get allocated in real time across five different strategies:
 

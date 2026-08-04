@@ -26,6 +26,8 @@ When building production AI applications, relying on a single LLM provider creat
 
 ### Key Engineering Solutions & Architecture
 
+<ModelRouterVisualizer />
+
 #### 1. Multi-Mode Task Classification Engine
 ModelRoute classifies user prompts across 8 intent categories (`code_generation`, `summarization`, `extraction`, `creative_writing`, `reasoning`, `simple_qa`, `translation`, `general`) using a hybrid strategy:
 *   **Deterministic Rules Classifier**: High-speed regex and keyword matching for instant categorization with zero API latency.
