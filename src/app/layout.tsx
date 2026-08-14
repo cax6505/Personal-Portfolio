@@ -105,7 +105,7 @@ export default function RootLayout({
               </div>
               <div className="flex items-center gap-6">
                 <a
-                  href="mailto:adithyakolli55@gmail.com"
+                  href="mailto:charanadithya6505@gmail.com"
                   className="hover:text-zinc-900 dark:hover:text-zinc-100 hover-trigger flex items-center gap-1.5 transition-colors"
                 >
                   <Mail className="size-3.5" />

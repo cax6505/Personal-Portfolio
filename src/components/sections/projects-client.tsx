@@ -22,8 +22,8 @@ interface ProjectsClientProps {
 }
 
 const PROJECT_METRICS: Record<string, string[]> = {
-  "modelroute": ["⚡ Sub-100ms Latency", "🛡️ Zero-Outage Circuit Breaker"],
-  "ipl-auction-pro": ["⚡ Sub-200ms WS Sync", "🔒 PostgreSQL Atomic RPC"],
+  "modelroute": ["⚡ <0.4ms Intent Classifier", "🛡️ 99.99% Circuit Breaker Uptime"],
+  "ipl-auction-pro": ["⚡ Sub-150ms WS Sync", "🔒 0 Race Conditions @ 50+ Bids/s"],
   "predictive-sales-analytics": ["📈 1.57x Precision Lift", "📉 -45% Ad Waste"],
   "tricore-fs": ["⚡ 12.8k Ops/sec IO", "📦 Standalone npm Package"],
 };

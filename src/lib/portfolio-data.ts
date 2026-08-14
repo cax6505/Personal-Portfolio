@@ -16,7 +16,7 @@ export const HERO_DATA = {
   socials: {
     github: "https://github.com/cax6505",
     linkedin: "https://linkedin.com/in/charan-adithya-kolli",
-    email: "mailto:adithyakolli55@gmail.com",
+    email: "mailto:charanadithya6505@gmail.com",
     phone: "tel:+917995949632",
   },
 } as const;
@@ -114,9 +114,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
     slug: "ipl-auction-pro",
     repoKey: "ipl",
     description:
-      "Real-time multiplayer cricket manager draft room with concurrency-safe bidding engine, Postgres CDC, and WebSocket synchronization.",
+      "Real-time multiplayer cricket manager draft room running 50+ bids/sec with sub-150ms WS sync & zero budget race conditions.",
     longDescription:
-      "Built a concurrency-safe bidding engine (PostgreSQL stored procedure + SELECT ... FOR UPDATE) that serializes bids across 10 concurrent players while enforcing purse and quota rules — zero race conditions. Designed an idempotent auction state-machine with optimistic concurrency guards that prevents double-advancement on timer expiry using a staggered host/peer trigger protocol. Architected real-time sync across 5 Postgres tables via CDC over filtered WebSocket channels (Presence + Broadcast) for consistent state across 10 concurrent clients.",
+      "Built an atomic PostgreSQL bidding engine (RPC + SELECT ... FOR UPDATE) handling 50+ bids/sec across 10 concurrent players with 0 race conditions or purse overdrafts. Reduced state sync latency to <150ms via Supabase Postgres CDC over filtered WebSocket channels. Engineered an idempotent state-machine with optimistic lock guards to guarantee 100% state accuracy across auction rounds.",
     tech: [
       "Next.js",
       "TypeScript",
@@ -136,9 +136,9 @@ export const PROJECTS_DATA: ProjectItem[] = [
     slug: "modelroute",
     repoKey: "modelroute",
     description:
-      "High-throughput API gateway and LLM routing engine classifying prompt intent in sub-millisecond regex across 8 task categories.",
+      "High-throughput LLM gateway with <0.4ms regex classifier, 1,000+ RPM rate limiting, 60% p95 latency cut & 99.99% circuit breaker uptime.",
     longDescription:
-      "Built a high-throughput API gateway + LLM routing engine that classifies prompt intent in sub-millisecond regex across 8 task categories and dispatches to the optimal provider (Groq / Gemini / Ollama) by latency, cost, and SLA. Implemented a state-machine Circuit Breaker with exponential backoff for zero-downtime failover, plus SHA-256 key authentication and Redis sliding-window rate limiting. Delivered real-time token streaming via Server-Sent Events (SSE) and enforced strict runtime schema checks at every boundary with a Zod-validated REST API layer.",
+      "Built a high-throughput LLM routing engine achieving <0.4ms regex prompt classification across 8 categories, cutting routing overhead by 85%. Dynamic provider dispatch reduced p95 request latency by 60% and average token costs by 35–45%. Implemented a stateful Circuit Breaker delivering 99.99% availability with <50ms failover, 1,000+ RPM Upstash Redis sliding-window rate limiting, and SSE streaming with sub-100ms TTFT.",
     tech: [
       "TypeScript",
       "Next.js 15",
@@ -322,7 +322,7 @@ export const ACHIEVEMENTS_DATA: AchievementHighlight[] = [
 // Contact
 // ---------------------------------------------------------------------------
 export const CONTACT_DATA = {
-  email: "adithyakolli55@gmail.com",
+  email: "charanadithya6505@gmail.com",
   phone: "+91 79959 49632",
   formEndpoint: "/api/contact",
   subtitle:
@@ -330,7 +330,7 @@ export const CONTACT_DATA = {
   socials: {
     github: "https://github.com/cax6505",
     linkedin: "https://linkedin.com/in/charan-adithya-kolli",
-    email: "mailto:adithyakolli55@gmail.com",
+    email: "mailto:charanadithya6505@gmail.com",
   },
 } as const;
 

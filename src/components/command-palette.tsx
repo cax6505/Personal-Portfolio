@@ -195,7 +195,7 @@ export function CommandPalette() {
             <CommandItem
               onSelect={() =>
                 runCommand(() =>
-                  window.open("mailto:kolli.c23csai@nst.rishihood.edu.in")
+                  window.open("mailto:charanadithya6505@gmail.com")
                 )
               }
             >

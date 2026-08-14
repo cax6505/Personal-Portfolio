@@ -23,7 +23,7 @@ export function ConsoleEasterEgg() {
     const charanApi = {
       name: "Charan Adithya",
       role: "Frontend / Fullstack Engineer & AI Enthusiast",
-      email: "adithyakolli55@gmail.com",
+      email: "charanadithya6505@gmail.com",
       github: "https://github.com/cax6505",
       getSkills: () => [
         "TypeScript", "React", "Next.js", "Tailwind CSS",

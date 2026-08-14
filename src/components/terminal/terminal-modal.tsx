@@ -128,7 +128,7 @@ export function TerminalModal() {
       case "contact":
         output = (
           <div className="text-xs font-mono text-zinc-300 space-y-1">
-            <p>📧 Email: <a href="mailto:adithyakolli55@gmail.com" className="text-sky-400 underline">adithyakolli55@gmail.com</a></p>
+            <p>📧 Email: <a href="mailto:charanadithya6505@gmail.com" className="text-sky-400 underline">charanadithya6505@gmail.com</a></p>
             <p>📞 Phone: <span className="text-zinc-300">+91 79959 49632</span></p>
             <p>🐙 GitHub: <a href="https://github.com/cax6505" target="_blank" className="text-sky-400 underline">github.com/cax6505</a></p>
             <p>💼 LinkedIn: <a href="https://linkedin.com/in/charan-adithya-kolli" target="_blank" className="text-sky-400 underline">linkedin.com/in/charan-adithya-kolli</a></p>
