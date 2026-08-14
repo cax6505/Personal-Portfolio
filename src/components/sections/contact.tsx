@@ -34,23 +34,9 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setStatus("error");
-      setFeedback("Please fill out all fields.");
-      return;
-    }
-
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim().replace(/['"]/g, "");
-
-    if (!accessKey) {
-      console.warn("NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY is missing or empty.");
-      // Fallback/Simulated Mode
-      setStatus("loading");
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setStatus("success");
-      setFeedback("Demo Mode: Message simulated! Configure NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY in .env.local to send real emails.");
-      setForm({ name: "", email: "", message: "" });
-      localStorage.removeItem("contact-form-draft");
+      setFeedback("Please fill out all fields (name, email, message).");
       return;
     }
 
@@ -58,25 +44,32 @@ export function Contact() {
     setFeedback("");
 
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: accessKey,
-          name: form.name,
-          email: form.email,
-          message: form.message,
-          subject: `New Portfolio Message from ${form.name}`,
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
         }),
       });
 
-      const data = await res.json();
+      const responseText = await res.text();
+      let data: Record<string, any> = {};
+
+      try {
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        console.warn("Server response was not JSON:", responseText);
+      }
 
       if (!res.ok || !data.success) {
-        throw new Error(data.message || "Failed to send message via Web3Forms.");
+        throw new Error(
+          data.error || data.message || `Failed to send message (HTTP ${res.status}).`
+        );
       }
 
       setStatus("success");
@@ -85,7 +78,8 @@ export function Contact() {
       localStorage.removeItem("contact-form-draft");
     } catch (err) {
       setStatus("error");
-      const errorMessage = err instanceof Error ? err.message : "Failed to send message. Please try again.";
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to send message. Please try again.";
       setFeedback(errorMessage);
     }
   };
