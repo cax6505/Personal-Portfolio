@@ -68,7 +68,14 @@ export async function getRepoStats(repoName: string): Promise<RepoStats> {
       return FALLBACK_STATS[fallbackKey];
     }
 
-    const data = await res.json();
+    const text = await res.text();
+    let data: Record<string, any> = {};
+    try {
+      data = text ? JSON.parse(text) : {};
+    } catch {
+      data = {};
+    }
+
     return {
       stars: data.stargazers_count || 0,
       forks: data.forks_count || 0,
