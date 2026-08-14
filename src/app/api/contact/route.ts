@@ -2,7 +2,17 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    let body: Record<string, any> = {};
+    try {
+      const raw = await request.text();
+      body = raw ? JSON.parse(raw) : {};
+    } catch {
+      return NextResponse.json(
+        { error: "Invalid request payload format." },
+        { status: 400 }
+      );
+    }
+
     const { name, email, message } = body;
 
     // Validate inputs
@@ -14,14 +24,14 @@ export async function POST(request: Request) {
     }
 
     // Safely sanitize the access key (strip quotes or surrounding spaces)
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY?.trim().replace(/['"]/g, "");
+    const accessKey = (process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY)?.trim().replace(/['"]/g, "");
 
     if (!accessKey) {
       console.warn("WEB3FORMS_ACCESS_KEY is missing or empty in env variables.");
       console.log("Simulating contact form email to charanadithya6505@gmail.com:", { name, email, message });
       
       // Simulate network latency
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 800));
 
       return NextResponse.json(
         { 
@@ -48,17 +58,16 @@ export async function POST(request: Request) {
       }),
     });
 
-    const contentType = response.headers.get("content-type") || "";
-    let data;
+    const responseText = await response.text();
+    let data: Record<string, any> = {};
 
-    if (contentType.includes("application/json")) {
-      data = await response.json();
-    } else {
-      const htmlText = await response.text();
-      console.error("Web3Forms API returned HTML instead of JSON. Server output snippet:", htmlText.slice(0, 500));
+    try {
+      data = responseText ? JSON.parse(responseText) : {};
+    } catch {
+      console.error("Web3Forms API returned non-JSON response:", responseText.slice(0, 500));
       return NextResponse.json(
         { 
-          error: "Mail server returned an invalid response page. Please verify your access key in .env.local matches the key Web3Forms sent you." 
+          error: "Mail server returned an invalid response. Please verify your access key." 
         },
         { status: 502 }
       );
@@ -68,13 +77,13 @@ export async function POST(request: Request) {
       console.error("Web3Forms API failed:", data);
       return NextResponse.json(
         { error: data.message || "Failed to send message via Web3Forms." },
-        { status: response.status || 500 }
+        { status: response.status >= 400 ? response.status : 500 }
       );
     }
 
     // Success response
     return NextResponse.json(
-      { success: true, message: "Thank you! Your message was sent successfully." },
+      { success: true, message: data.message || "Thank you! Your message was sent successfully." },
       { status: 200 }
     );
   } catch (error) {
