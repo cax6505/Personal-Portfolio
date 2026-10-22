@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { MotionConfig } from "framer-motion";
 import { CommandPalette } from "@/components/command-palette";
@@ -8,16 +7,6 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { HERO_DATA } from "@/lib/portfolio-data";
 import "./globals.css";
 import { AuroraBackground } from "@/components/ui/aurora-background";
-
-const sansFont = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const displayFont = Outfit({
-  variable: "--font-display",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://personal-portfolio-charanadithya.vercel.app"),
@@ -82,7 +71,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sansFont.variable} ${displayFont.variable} font-sans`}
+      className="font-sans"
     >
       <body className="relative min-h-screen bg-background text-foreground antialiased flex flex-col selection:bg-zinc-200 dark:selection:bg-zinc-800">
         <ThemeProvider

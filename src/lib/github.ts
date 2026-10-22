@@ -34,63 +34,15 @@ const FALLBACK_STATS: Record<string, RepoStats> = {
 
 export async function getRepoStats(repoName: string): Promise<RepoStats> {
   const repoSlug = repoName.toLowerCase();
-  
-  // Resolve actual repo identifier names
-  let actualRepoName = repoName;
-  if (repoSlug.includes("modelroute")) {
-    actualRepoName = "ModelRoute";
-  } else if (repoSlug.includes("ipl")) {
-    actualRepoName = "IPL-Auction-simulator"; // Make sure we query the exact repo name
-  } else if (repoSlug.includes("sales") || repoSlug.includes("predictive")) {
-    actualRepoName = "Predictive-Sales-Analytics-Engine";
-  } else if (repoSlug.includes("tricore")) {
-    actualRepoName = "TriCore-FS";
-  }
+  const fallbackKey = repoSlug.includes("modelroute")
+    ? "modelroute"
+    : repoSlug.includes("ipl")
+      ? "ipl-auction-pro"
+      : repoSlug.includes("tricore")
+        ? "tricore-fs"
+        : "sales-analytics";
 
-  try {
-    const res = await fetch(`https://api.github.com/repos/cax6505/${actualRepoName}`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour in Next.js RSC
-      headers: {
-        "User-Agent": "cax6505-portfolio",
-        Accept: "application/vnd.github.v3+json",
-      },
-    });
-
-    if (!res.ok) {
-      console.warn(`GitHub API failed for repo ${actualRepoName}. Using fallback stats.`);
-      const fallbackKey = repoSlug.includes("modelroute")
-        ? "modelroute"
-        : repoSlug.includes("ipl")
-          ? "ipl-auction-pro"
-          : repoSlug.includes("tricore")
-            ? "tricore-fs"
-            : "sales-analytics";
-      return FALLBACK_STATS[fallbackKey];
-    }
-
-    const text = await res.text();
-    let data: { stargazers_count?: number; forks_count?: number; language?: string; html_url?: string } = {};
-    try {
-      data = text ? JSON.parse(text) : {};
-    } catch {
-      data = {};
-    }
-
-    return {
-      stars: data.stargazers_count || 0,
-      forks: data.forks_count || 0,
-      language: data.language || "TypeScript",
-      url: data.html_url || `https://github.com/cax6505/${actualRepoName}`,
-    };
-  } catch (error) {
-    console.error(`Error fetching stats for ${repoName}:`, error);
-    const fallbackKey = repoSlug.includes("modelroute")
-      ? "modelroute"
-      : repoSlug.includes("ipl")
-        ? "ipl-auction-pro"
-        : repoSlug.includes("tricore")
-          ? "tricore-fs"
-          : "sales-analytics";
-    return FALLBACK_STATS[fallbackKey];
-  }
+  // Repository language and links are stable portfolio content. Avoid making
+  // production rendering depend on a live GitHub API response.
+  return FALLBACK_STATS[fallbackKey];
 }
