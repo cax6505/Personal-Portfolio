@@ -1,16 +1,18 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, Github, Linkedin, Mail, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HERO_DATA } from "@/lib/portfolio-data";
 import { HeroCanvas } from "@/components/ui/hero-canvas";
 import { playClickSound } from "@/lib/sound-effects";
+import { Magnetic } from "@/components/ui/magnetic";
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
@@ -20,7 +22,7 @@ export function Hero() {
   };
 
   const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
+    hidden: { y: 8, opacity: 0.92 },
     visible: {
       y: 0,
       opacity: 1,
@@ -30,6 +32,11 @@ export function Hero() {
         damping: 15,
       },
     },
+  };
+
+  const handleOpenResume = () => {
+    playClickSound();
+    window.dispatchEvent(new CustomEvent("open-resume-modal"));
   };
 
   return (
@@ -43,7 +50,7 @@ export function Hero() {
       <div className="container mx-auto max-w-4xl px-4 text-center">
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={reduceMotion ? false : "hidden"}
           animate="visible"
           className="space-y-8"
         >
@@ -77,51 +84,74 @@ export function Hero() {
             variants={itemVariants}
             className="flex items-center justify-center gap-2 sm:gap-3 py-2 flex-wrap"
           >
-            <a
-              href={HERO_DATA.socials.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => playClickSound()}
-              className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
-            >
-              <Github className="size-3.5" />
-              <span>GITHUB</span>
-            </a>
-            <a
-              href={HERO_DATA.socials.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => playClickSound()}
-              className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
-            >
-              <Linkedin className="size-3.5" />
-              <span>LINKEDIN</span>
-            </a>
-            <a
-              href="#contact"
-              onClick={() => playClickSound()}
-              className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
-            >
-              <Mail className="size-3.5" />
-              <span>EMAIL</span>
-            </a>
+            <Magnetic strength={0.3}>
+              <a
+                href={HERO_DATA.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => playClickSound()}
+                className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
+              >
+                <Github className="size-3.5" />
+                <span>GITHUB</span>
+              </a>
+            </Magnetic>
+
+            <Magnetic strength={0.3}>
+              <a
+                href={HERO_DATA.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => playClickSound()}
+                className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
+              >
+                <Linkedin className="size-3.5" />
+                <span>LINKEDIN</span>
+              </a>
+            </Magnetic>
+
+            <Magnetic strength={0.3}>
+              <a
+                href="#contact"
+                onClick={() => playClickSound()}
+                className="flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-xs font-mono text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-300 dark:hover:border-white/20 transition-all duration-300"
+              >
+                <Mail className="size-3.5" />
+                <span>EMAIL</span>
+              </a>
+            </Magnetic>
           </motion.div>
 
           {/* Action CTAs */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center justify-center pt-4"
+            className="flex items-center justify-center gap-4 pt-4 flex-wrap"
           >
-            <Button
-              asChild
-              onClick={() => playClickSound()}
-              className="relative group bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-zinc-50 dark:text-zinc-950 font-medium px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-105"
-            >
-              <a href="#projects" className="flex items-center gap-2.5">
-                <span>View My Work</span>
-                <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </a>
-            </Button>
+            <Magnetic strength={0.25}>
+              <Button
+                asChild
+                onClick={() => playClickSound()}
+                className="relative group bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-zinc-50 dark:text-zinc-950 font-medium px-6 sm:px-8 py-5 sm:py-6 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-105"
+              >
+                <a href="#projects" className="flex items-center gap-2.5">
+                  <span>View My Work</span>
+                  <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </a>
+              </Button>
+            </Magnetic>
+
+            <Magnetic strength={0.25}>
+              <Button
+                variant="outline"
+                onClick={handleOpenResume}
+                className="rounded-full px-6 sm:px-7 py-5 sm:py-6 text-xs sm:text-sm font-semibold border border-zinc-300/80 dark:border-white/10 hover:bg-zinc-100 dark:hover:bg-white/[0.05] text-zinc-800 dark:text-zinc-200 shadow-sm transition-all duration-300 hover:scale-105 cursor-pointer"
+              >
+                <span className="flex items-center gap-2">
+                  <FileText className="size-4 text-violet-500" />
+                  <span>Tailored Resume</span>
+                </span>
+              </Button>
+            </Magnetic>
           </motion.div>
         </motion.div>
       </div>

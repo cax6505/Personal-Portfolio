@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Search, Menu, X, Terminal as TerminalIcon, Volume2, VolumeX } from "lucide-react";
+import { Search, Menu, X, Volume2, VolumeX, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { isAudioMuted, toggleAudioMute, playClickSound, playToggleSound } from "@/lib/sound-effects";
+import { Magnetic } from "@/components/ui/magnetic";
 
 export function NavigationHeader() {
   const pathname = usePathname();
@@ -22,9 +23,9 @@ export function NavigationHeader() {
     }
   };
 
-  const handleOpenTerminal = () => {
+  const handleOpenResume = () => {
     playClickSound();
-    window.dispatchEvent(new CustomEvent("open-terminal"));
+    window.dispatchEvent(new CustomEvent("open-resume-modal"));
   };
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export function NavigationHeader() {
     }
 
     const handleScroll = () => {
-      const sections = ["about", "experience", "projects", "skills", "contact"];
+      const sections = ["about", "experience", "projects", "skills", "achievements", "contact"];
       const scrollPosition = window.scrollY + window.innerHeight * 0.35;
 
       if (window.scrollY < 100) {
@@ -64,6 +65,14 @@ export function NavigationHeader() {
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
+      const closeOnEscape = (event: KeyboardEvent) => {
+        if (event.key === "Escape") setMobileMenuOpen(false);
+      };
+      window.addEventListener("keydown", closeOnEscape);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", closeOnEscape);
+      };
     } else {
       document.body.style.overflow = "";
     }
@@ -84,79 +93,93 @@ export function NavigationHeader() {
     { label: "Experience", href: "/#experience", id: "experience" },
     { label: "Projects", href: "/#projects", id: "projects" },
     { label: "Skills", href: "/#skills", id: "skills" },
+    { label: "Achievements", href: "/#achievements", id: "achievements" },
     { label: "Contact", href: "/#contact", id: "contact" },
   ];
 
   return (
     <>
       <header className="fixed top-4 left-1/2 -translate-x-1/2 z-30 w-fit rounded-full border border-zinc-300/60 dark:border-white/15 bg-white/75 dark:bg-white/[0.08] backdrop-blur-2xl shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_0_0_rgba(255,255,255,0.8)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.9),inset_0_1px_0_0_rgba(255,255,255,0.2)] transition-all duration-300">
-        <div className="px-3 md:px-5 h-14 flex items-center gap-3 md:gap-5">
+        <div className="px-3 md:px-5 h-14 flex items-center gap-2.5 md:gap-4">
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => {
               playClickSound();
-              setMobileMenuOpen(!mobileMenuOpen);
+              setMobileMenuOpen((isOpen) => !isOpen);
             }}
             className="md:hidden flex items-center justify-center size-9 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-100/80 dark:bg-white/[0.04] text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200/80 dark:hover:bg-white/[0.08] transition-all duration-200"
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls={mobileMenuOpen ? "mobile-navigation" : undefined}
           >
             {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-5 text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-2 lg:gap-4 text-sm font-medium">
             {navItems.map((item) => {
               const isActive = currentActiveSection === item.id;
               return (
-                <Link
-                  key={item.id}
-                  href={item.href}
-                  onClick={() => playClickSound()}
-                  className={`hover-trigger transition-all duration-300 relative py-1 px-1.5 rounded-md ${
-                    isActive
-                      ? "text-zinc-950 dark:text-zinc-50 font-bold"
-                      : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 font-medium"
-                  }`}
-                >
-                  {item.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-1.5 right-1.5 h-0.5 rounded-full bg-violet-500 dark:bg-violet-400" />
-                  )}
-                </Link>
+                <Magnetic key={item.id} strength={0.25}>
+                  <Link
+                    href={item.href}
+                    onClick={() => playClickSound()}
+                      className={`hover-trigger transition-all duration-300 active:scale-[0.98] relative py-1 px-1.5 rounded-md ${
+                      isActive
+                        ? "text-zinc-950 dark:text-zinc-50 font-bold"
+                        : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 font-medium"
+                    }`}
+                  >
+                    {item.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="active-section-indicator"
+                        transition={{ type: "spring", stiffness: 360, damping: 32 }}
+                        className="absolute bottom-0 left-1.5 right-1.5 h-0.5 rounded-full bg-violet-500 dark:bg-violet-400"
+                      />
+                    )}
+                  </Link>
+                </Magnetic>
               );
             })}
           </nav>
 
-          {/* Command Palette Trigger Button */}
-          <button
-            onClick={handleOpenSearch}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 text-[10px] font-mono hover-trigger transition-all duration-300 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]"
-            aria-label="Search or type a command"
-          >
-            <Search className="size-3 text-zinc-400" />
-            <span className="hidden sm:inline">Search</span>
-            <kbd className="hidden sm:inline px-1.5 py-0.5 rounded bg-zinc-200/80 dark:bg-zinc-800/80 text-[8px] font-sans">⌘K</kbd>
-          </button>
+          {/* Resume Trigger Pill */}
+          <Magnetic strength={0.3}>
+            <button
+              onClick={handleOpenResume}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-violet-500/20 bg-violet-500/10 hover:bg-violet-500/20 active:scale-[0.98] text-violet-700 dark:text-violet-300 text-xs font-semibold hover-trigger transition-all duration-300 shadow-sm cursor-pointer"
+              title="Open role-specific resume preview"
+            >
+              <FileText className="size-3.5" />
+              <span className="hidden sm:inline">Resume</span>
+            </button>
+          </Magnetic>
 
-          {/* Terminal Launcher Icon */}
-          <button
-            onClick={handleOpenTerminal}
-            className="flex items-center justify-center size-8 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-zinc-600 dark:text-zinc-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:border-emerald-500/30 transition-all duration-200"
-            title="Open Zsh Terminal (or press T)"
-            aria-label="Open terminal shell"
-          >
-            <TerminalIcon className="size-3.5" />
-          </button>
+          {/* Command Palette Trigger Button */}
+          <Magnetic strength={0.3}>
+            <button
+              onClick={handleOpenSearch}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 active:scale-[0.98] text-[10px] font-mono hover-trigger transition-all duration-300 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]"
+              aria-label="Search or type a command"
+            >
+              <Search className="size-3 text-zinc-400" />
+              <span className="hidden sm:inline">Search</span>
+              <kbd className="hidden sm:inline px-1.5 py-0.5 rounded bg-zinc-200/80 dark:bg-zinc-800/80 text-[8px] font-sans">⌘K</kbd>
+            </button>
+          </Magnetic>
 
           {/* Web Audio Mute / Unmute Toggle */}
-          <button
-            onClick={handleToggleMute}
-            className="flex items-center justify-center size-8 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-zinc-600 dark:text-zinc-400 hover:text-violet-500 transition-all duration-200"
-            title={muted ? "Unmute Audio FX" : "Mute Audio FX"}
-            aria-label="Toggle UI sound effects"
-          >
-            {muted ? <VolumeX className="size-3.5 opacity-60" /> : <Volume2 className="size-3.5 text-violet-400 animate-pulse" />}
-          </button>
+          <Magnetic strength={0.3}>
+            <button
+              onClick={handleToggleMute}
+              className="flex items-center justify-center size-8 rounded-full border border-zinc-200 dark:border-white/5 bg-zinc-100/80 dark:bg-white/[0.02] text-zinc-600 dark:text-zinc-400 hover:text-violet-500 transition-all duration-200 cursor-pointer"
+              title={muted ? "Unmute Audio FX" : "Mute Audio FX"}
+              aria-label="Toggle UI sound effects"
+            >
+              {muted ? <VolumeX className="size-3.5 opacity-60" /> : <Volume2 className="size-3.5 text-violet-400 animate-pulse" />}
+            </button>
+          </Magnetic>
 
           <div className="hidden md:block h-5 w-px bg-zinc-300 dark:bg-zinc-800" />
 
@@ -186,6 +209,7 @@ export function NavigationHeader() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              id="mobile-navigation"
               className="fixed top-20 left-4 right-4 z-25 md:hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] overflow-hidden"
             >
               <div className="py-3 px-2">

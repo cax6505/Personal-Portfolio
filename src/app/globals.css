@@ -2,6 +2,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --motion-quick: 160ms;
+  --motion-standard: 280ms;
+  --motion-surface: 480ms;
+  --ease-glass: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -29,28 +36,28 @@
   :root {
     --background: hsl(0 0% 99%);
     --foreground: hsl(240 10% 3.9%);
-    
+
     --card: hsl(0 0% 100%);
     --card-foreground: hsl(240 10% 3.9%);
-    
+
     --popover: hsl(0 0% 100%);
     --popover-foreground: hsl(240 10% 3.9%);
-    
+
     --primary: hsl(240 5.9% 10%);
     --primary-foreground: hsl(0 0% 98%);
-    
+
     --secondary: hsl(240 4.8% 95.9%);
     --secondary-foreground: hsl(240 5.9% 10%);
-    
+
     --muted: hsl(240 4.8% 95.9%);
     --muted-foreground: hsl(240 3.8% 46.1%);
-    
+
     --accent: hsl(240 4.8% 95.9%);
     --accent-foreground: hsl(240 5.9% 10%);
-    
+
     --destructive: hsl(0 84.2% 60.2%);
     --destructive-foreground: hsl(0 0% 98%);
-    
+
     --border: hsl(240 5.9% 90%);
     --input: hsl(240 5.9% 90%);
     --ring: hsl(240 5.9% 10%);
@@ -59,28 +66,28 @@
   .dark {
     --background: hsl(0 0% 0%);
     --foreground: hsl(0 0% 98%);
-    
+
     --card: hsl(240 10% 4.8%);
     --card-foreground: hsl(0 0% 98%);
-    
+
     --popover: hsl(240 10% 3.9%);
     --popover-foreground: hsl(0 0% 98%);
-    
+
     --primary: hsl(0 0% 98%);
     --primary-foreground: hsl(240 5.9% 10%);
-    
+
     --secondary: hsl(240 3.7% 12.9%);
     --secondary-foreground: hsl(0 0% 98%);
-    
+
     --muted: hsl(240 3.7% 15.9%);
     --muted-foreground: hsl(240 5% 64.9%);
-    
+
     --accent: hsl(240 3.7% 12.9%);
     --accent-foreground: hsl(0 0% 98%);
-    
+
     --destructive: hsl(0 62.8% 30.6%);
     --destructive-foreground: hsl(0 0% 98%);
-    
+
     --border: hsl(240 3.7% 15.9%);
     --input: hsl(240 3.7% 15.9%);
     --ring: hsl(240 4.9% 83.9%);
@@ -91,12 +98,12 @@
   * {
     border-color: var(--border);
   }
-  
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
   }
-  
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -114,17 +121,100 @@
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible,
-  button:focus-visible {
-    outline: none;
-    ring: 2px;
-    ring-offset: 2px;
-    ring-color: var(--ring);
+  button:focus-visible,
+  a:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #a5b4fc;
+    outline-offset: 3px;
   }
 
   /* Custom Selection */
   ::selection {
     background-color: color-mix(in srgb, var(--foreground) 10%, transparent);
     color: var(--foreground);
+  }
+}
+
+.ambient-drift {
+  will-change: transform;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.ambient-drift-a {
+  animation-name: ambient-drift-a;
+  animation-duration: 58s;
+}
+
+.ambient-drift-b {
+  animation-name: ambient-drift-b;
+  animation-duration: 72s;
+}
+
+.ambient-drift-c {
+  animation-name: ambient-drift-c;
+  animation-duration: 86s;
+}
+
+.aurora-lights {
+  filter: blur(44px);
+  opacity: 0.32;
+}
+
+.dark .aurora-lights {
+  opacity: 0.42;
+}
+
+@media (min-width: 640px) {
+  .aurora-lights {
+    filter: blur(80px);
+    opacity: 0.42;
+  }
+
+  .dark .aurora-lights {
+    opacity: 0.5;
+  }
+}
+
+@media (min-width: 768px) {
+  .aurora-lights {
+    filter: blur(120px);
+    opacity: 0.48;
+  }
+
+  .dark .aurora-lights {
+    opacity: 0.56;
+  }
+}
+
+@keyframes ambient-drift-a {
+  from { transform: translate3d(-1%, 0, 0); }
+  to { transform: translate3d(2%, 3%, 0); }
+}
+
+@keyframes ambient-drift-b {
+  from { transform: translate3d(1%, -1%, 0); }
+  to { transform: translate3d(-2%, 2%, 0); }
+}
+
+@keyframes ambient-drift-c {
+  from { transform: translate3d(-1%, 1%, 0); }
+  to { transform: translate3d(2%, -2%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -159,4 +249,28 @@
 
 .dark .bg-grain {
   opacity: 0.015;
+}
+
+/* Print Optimization for Resume PDF Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  header,
+  footer,
+  .bg-spotlight-glow,
+  .bg-grain,
+  #hero,
+  #about,
+  #experience,
+  #projects,
+  #skills,
+  #achievements,
+  #contact,
+  .custom-cursor,
+  [aria-label="Toggle navigation menu"] {
+    display: none !important;
+  }
 }

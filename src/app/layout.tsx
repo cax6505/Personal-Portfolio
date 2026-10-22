@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { MotionConfig } from "framer-motion";
 import { CommandPalette } from "@/components/command-palette";
 import { NavigationHeader } from "@/components/navigation-header";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { HERO_DATA } from "@/lib/portfolio-data";
 import "./globals.css";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 
@@ -18,6 +20,10 @@ const displayFont = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://personal-portfolio-charanadithya.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Charan Adithya | Frontend Engineer & AI/ML Developer",
   description:
     "Portfolio of Charan Adithya, a B.Tech Computer Science & AI student and developer specialized in frontend engineering, React/Next.js platforms, and machine learning pipelines.",
@@ -35,17 +41,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://cax6505.vercel.app",
+    url: "https://personal-portfolio-charanadithya.vercel.app",
     title: "Charan Adithya | Frontend Engineer & AI/ML Developer",
     description:
       "B.Tech CS & AI developer with frontend internship experience at IIT Roorkee and ML expertise from Amazon ML Summer School.",
     siteName: "Charan Adithya Portfolio",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Charan Adithya — software engineer and AI/ML developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Charan Adithya | Frontend Engineer & AI/ML Developer",
     description:
       "B.Tech CS & AI developer with frontend internship experience at IIT Roorkee and ML expertise from Amazon ML Summer School.",
+    images: ["/api/og"],
   },
 };
 
@@ -76,6 +91,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <MotionConfig reducedMotion="user">
           {/* Command Palette search trigger */}
           <CommandPalette />
 
@@ -101,7 +117,7 @@ export default function RootLayout({
             <div className="container mx-auto max-w-6xl px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500 dark:text-zinc-400">
               <div className="text-center md:text-left">
                 <p>© {new Date().getFullYear()} Charan Adithya. All rights reserved.</p>
-                <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">Designed & engineered with Next.js 15 + Tailwind CSS v4</p>
+                <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">Built with Next.js 16 + Tailwind CSS v4</p>
               </div>
               <div className="flex items-center gap-6">
                 <a
@@ -121,7 +137,7 @@ export default function RootLayout({
                   <span>GitHub</span>
                 </a>
                 <a
-                  href="https://linkedin.com/in/charank6505"
+                  href={HERO_DATA.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-zinc-900 dark:hover:text-zinc-100 hover-trigger flex items-center gap-1.5 transition-colors"
@@ -132,6 +148,7 @@ export default function RootLayout({
               </div>
             </div>
           </footer>
+          </MotionConfig>
         </ThemeProvider>
       </body>
     </html>
