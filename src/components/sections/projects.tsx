@@ -13,9 +13,9 @@ export async function Projects() {
 
   const initialStats = {
     modelroute: modelrouteStats,
-    ipl: iplStats,
-    sales: salesStats,
-    tricore: tricoreStats,
+    "ipl-auction-pro": iplStats,
+    "predictive-sales-analytics": salesStats,
+    "tricore-fs": tricoreStats,
   };
 
   return <ProjectsClient initialStats={initialStats} />;

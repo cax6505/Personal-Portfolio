@@ -4,6 +4,8 @@ import { AuctionSimulator } from "@/components/widgets/auction-simulator";
 import { SalesForecastPlayground } from "@/components/widgets/sales-forecast-playground";
 import { ModelRouterVisualizer } from "@/components/widgets/model-router-visualizer";
 import { FsTopologyVisualizer } from "@/components/widgets/fs-topology-visualizer";
+import { ModelRouteArchitectureSimulator } from "@/components/widgets/modelroute-architecture-simulator";
+import { DraftForgeArchitectureSimulator } from "@/components/widgets/draftforge-architecture-simulator";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -11,6 +13,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     SalesForecastPlayground,
     ModelRouterVisualizer,
     FsTopologyVisualizer,
+    ModelRouteArchitectureSimulator,
+    DraftForgeArchitectureSimulator,
     h1: ({ children }) => (
       <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mt-8 mb-4 font-display">
         {children}

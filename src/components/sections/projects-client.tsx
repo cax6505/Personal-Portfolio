@@ -22,10 +22,10 @@ interface ProjectsClientProps {
 }
 
 const PROJECT_METRICS: Record<string, string[]> = {
-  "modelroute": ["⚡ <0.4ms Intent Classifier", "🛡️ 99.99% Circuit Breaker Uptime"],
+  "modelroute": ["⚡ <0.4ms Intent Classifier", "🛡️ 99.99% Availability"],
   "ipl-auction-pro": ["⚡ Sub-150ms WS Sync", "🔒 0 Race Conditions @ 50+ Bids/s"],
-  "predictive-sales-analytics": ["📈 1.57x Precision Lift", "📉 -45% Ad Waste"],
-  "tricore-fs": ["⚡ 12.8k Ops/sec IO", "📦 Standalone npm Package"],
+  "predictive-sales-analytics": ["📈 1.57x Precision Lift", "📉 45% Less Coupon Ad Spend"],
+  "tricore-fs": ["🧭 5 Allocation Strategies", "📦 Standalone npm Package"],
 };
 
 export function ProjectsClient({ initialStats }: ProjectsClientProps) {
