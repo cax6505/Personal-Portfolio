@@ -6,9 +6,9 @@ import { Projects } from "@/components/sections/projects";
 import { Skills } from "@/components/sections/skills";
 import { Achievements } from "@/components/sections/achievements";
 import { Contact } from "@/components/sections/contact";
-import { TerminalModal } from "@/components/terminal/terminal-modal";
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { ConsoleEasterEgg } from "@/components/console-easter-egg";
+import { ResumeModal } from "@/components/resume/resume-modal";
 
 export default function Home() {
   return (
@@ -38,8 +38,8 @@ export default function Home() {
       {/* Contact section */}
       <Contact />
 
-      {/* Interactive Zsh Terminal Shell Modal */}
-      <TerminalModal />
+      {/* Role-Tailored Dynamic Resume Modal */}
+      <ResumeModal />
     </div>
   );
 }

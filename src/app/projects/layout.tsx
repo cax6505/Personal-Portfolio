@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { CodeCopier } from "@/components/ui/code-copier";
-import { TerminalModal } from "@/components/terminal/terminal-modal";
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 
 export default function ProjectsLayout({
@@ -37,7 +36,6 @@ export default function ProjectsLayout({
 
       <CodeCopier />
       <KeyboardShortcuts />
-      <TerminalModal />
 
       <div className="container mx-auto max-w-3xl px-4">
         {/* Back navigation */}

@@ -14,7 +14,7 @@ export function KeyboardShortcutsModal({ isOpen, onClose }: KeyboardShortcutsMod
     { key: "j / k", label: "Vim Scroll Down / Up" },
     { key: "1 - 6", label: "Jump to Hero, About, Experience, Projects, Skills, Contact" },
     { key: "⌘ K", label: "Open Command Palette" },
-    { key: "T", label: "Open Zsh Terminal Shell" },
+    { key: "R", label: "Open role-specific resume preview" },
     { key: "?", label: "Toggle Shortcuts Cheatsheet" },
   ];
 

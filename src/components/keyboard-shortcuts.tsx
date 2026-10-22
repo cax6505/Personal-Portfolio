@@ -48,9 +48,9 @@ export function KeyboardShortcuts() {
         case "?":
           setShowCheatsheet((prev) => !prev);
           break;
-        case "t":
-        case "T":
-          window.dispatchEvent(new CustomEvent("open-terminal"));
+        case "r":
+        case "R":
+          window.dispatchEvent(new CustomEvent("open-resume-modal"));
           break;
         default:
           break;

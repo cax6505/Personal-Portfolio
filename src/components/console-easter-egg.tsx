@@ -36,10 +36,6 @@ export function ConsoleEasterEgg() {
         { name: "Predictive Sales Analytics", desc: "ML repeat purchase forecast" },
         { name: "SaveSpace", desc: "Async file system topology simulator" }
       ],
-      openTerminal: () => {
-        window.dispatchEvent(new CustomEvent("open-terminal"));
-        return "Terminal opened!";
-      }
     };
 
     (window as unknown as Record<string, unknown>).charan = charanApi;

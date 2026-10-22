@@ -27,6 +27,7 @@ import {
   Clock,
   ExternalLink,
 } from "lucide-react";
+import { HERO_DATA } from "@/lib/portfolio-data";
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -78,6 +79,15 @@ export function CommandPalette() {
           <CommandEmpty>No results found.</CommandEmpty>
           
           <CommandGroup heading="Navigation">
+            <CommandItem
+              onSelect={() =>
+                runCommand(() => window.dispatchEvent(new CustomEvent("open-resume-modal")))
+              }
+            >
+              <FileText className="mr-2 h-4 w-4 text-violet-500" />
+              <span className="font-semibold text-violet-600 dark:text-violet-400">Open role-specific resume preview</span>
+              <CommandShortcut>R</CommandShortcut>
+            </CommandItem>
             <CommandItem onSelect={() => scrollToSection("hero")}>
               <User className="mr-2 h-4 w-4" />
               <span>Hero / Intro</span>
@@ -184,7 +194,7 @@ export function CommandPalette() {
             <CommandItem
               onSelect={() =>
                 runCommand(() =>
-                  window.open("https://linkedin.com/in/charank6505", "_blank")
+                  window.open(HERO_DATA.socials.linkedin, "_blank", "noopener,noreferrer")
                 )
               }
             >
