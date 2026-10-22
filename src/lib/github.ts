@@ -22,7 +22,7 @@ const FALLBACK_STATS: Record<string, RepoStats> = {
     stars: 5,
     forks: 1,
     language: "Python",
-    url: "https://github.com/cax6505", // default fallback URL
+    url: "https://github.com/cax6505/Predictive-Sales-Analytics-Engine",
   },
   "tricore-fs": {
     stars: 0,
@@ -69,7 +69,7 @@ export async function getRepoStats(repoName: string): Promise<RepoStats> {
     }
 
     const text = await res.text();
-    let data: Record<string, any> = {};
+    let data: { stargazers_count?: number; forks_count?: number; language?: string; html_url?: string } = {};
     try {
       data = text ? JSON.parse(text) : {};
     } catch {

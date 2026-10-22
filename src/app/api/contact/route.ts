@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    let body: Record<string, any> = {};
+    let body: Record<string, unknown> = {};
     try {
       const raw = await request.text();
       body = raw ? JSON.parse(raw) : {};
@@ -13,32 +13,34 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, email, message } = body;
+    const name = typeof body.name === "string" ? body.name.trim() : "";
+    const email = typeof body.email === "string" ? body.email.trim() : "";
+    const message = typeof body.message === "string" ? body.message.trim() : "";
 
-    // Validate inputs
-    if (!name || !email || !message) {
+    if (
+      !name || name.length > 100 ||
+      !email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+      !message || message.length > 500
+    ) {
       return NextResponse.json(
-        { error: "Please fill in all fields (name, email, message)." },
+        { error: "Enter a valid name, email, and message (up to 500 characters)." },
         { status: 400 }
       );
     }
 
     // Safely sanitize the access key (strip quotes or surrounding spaces)
-    const accessKey = (process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY)?.trim().replace(/['"]/g, "");
+    const accessKey = process.env.WEB3FORMS_ACCESS_KEY
+      ?.trim()
+      .replace(/['"]/g, "");
 
-    if (!accessKey) {
+    if (!accessKey || accessKey.toLowerCase() === "your_access_key_here") {
       console.warn("WEB3FORMS_ACCESS_KEY is missing or empty in env variables.");
-      console.log("Simulating contact form email to charanadithya6505@gmail.com:", { name, email, message });
-      
-      // Simulate network latency
-      await new Promise((resolve) => setTimeout(resolve, 800));
-
       return NextResponse.json(
-        { 
-          success: true, 
-          message: "Demo Mode: Message simulated! Configure WEB3FORMS_ACCESS_KEY in .env.local to send real emails." 
+        {
+          error:
+            "The contact form is not configured yet. Please email charanadithya6505@gmail.com directly.",
         },
-        { status: 200 }
+        { status: 503 },
       );
     }
 
@@ -51,15 +53,15 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         access_key: accessKey,
-        name: name,
-        email: email,
-        message: message,
+        name,
+        email,
+        message,
         subject: `New Portfolio Message from ${name}`,
       }),
     });
 
     const responseText = await response.text();
-    let data: Record<string, any> = {};
+    let data: Record<string, unknown> = {};
 
     try {
       data = responseText ? JSON.parse(responseText) : {};
@@ -73,10 +75,10 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!response.ok || !data.success) {
+    if (!response.ok || (data as { success?: boolean }).success !== true) {
       console.error("Web3Forms API failed:", data);
       return NextResponse.json(
-        { error: data.message || "Failed to send message via Web3Forms." },
+        { error: (data as { message?: string }).message || "Failed to send message via Web3Forms." },
         { status: response.status >= 400 ? response.status : 500 }
       );
     }

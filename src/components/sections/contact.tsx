@@ -58,7 +58,7 @@ export function Contact() {
       });
 
       const responseText = await res.text();
-      let data: Record<string, any> = {};
+      let data: Record<string, unknown> = {};
 
       try {
         data = responseText ? JSON.parse(responseText) : {};
@@ -66,14 +66,19 @@ export function Contact() {
         console.warn("Server response was not JSON:", responseText);
       }
 
-      if (!res.ok || !data.success) {
+      if (!res.ok || !(data as { success?: boolean }).success) {
         throw new Error(
-          data.error || data.message || `Failed to send message (HTTP ${res.status}).`
+          (data as { error?: string; message?: string }).error ||
+            (data as { error?: string; message?: string }).message ||
+            `Failed to send message (HTTP ${res.status}).`
         );
       }
 
       setStatus("success");
-      setFeedback(data.message || "Thank you! Your message was sent successfully.");
+      setFeedback(
+        ((data as { message?: string }).message as string) ||
+          "Thank you! Your message was sent successfully."
+      );
       setForm({ name: "", email: "", message: "" });
       localStorage.removeItem("contact-form-draft");
     } catch (err) {
@@ -134,6 +139,9 @@ export function Contact() {
                     type="text"
                     id="name"
                     name="name"
+                    autoComplete="name"
+                    required
+                    maxLength={100}
                     value={form.name}
                     onChange={handleChange}
                     disabled={status === "loading"}
@@ -150,6 +158,9 @@ export function Contact() {
                     type="email"
                     id="email"
                     name="email"
+                    autoComplete="email"
+                    required
+                    maxLength={254}
                     value={form.email}
                     onChange={handleChange}
                     disabled={status === "loading"}
@@ -178,6 +189,7 @@ export function Contact() {
                 <textarea
                   id="message"
                   name="message"
+                  required
                   rows={5}
                   maxLength={500}
                   value={form.message}
@@ -213,6 +225,8 @@ export function Contact() {
                 <AnimatePresence mode="wait">
                   {status === "success" && (
                     <motion.div
+                      role="status"
+                      aria-live="polite"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
@@ -225,6 +239,8 @@ export function Contact() {
 
                   {status === "error" && (
                     <motion.div
+                      role="alert"
+                      aria-live="assertive"
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
